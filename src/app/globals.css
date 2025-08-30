@@ -3,13 +3,40 @@
 /* Ken Baylon E‑Portfolio global theme */
 :root {
   /* Brand palette */
-  --kb-black: #2d2a2b;
+  --kb-black: #141414;
   --kb-red: #c22126;
   --kb-white: #ffffff;
 
   /* App colors */
   --background: var(--kb-black);
   --foreground: var(--kb-white);
+
+  /* Derived tokens for dark */
+  --muted-80: rgba(255, 255, 255, 0.8);
+  --muted-70: rgba(255, 255, 255, 0.7);
+  --muted-50: rgba(255, 255, 255, 0.5);
+  --border: rgba(255, 255, 255, 0.1);
+  --surface: rgba(31, 29, 30, 0.8);
+  --soft: rgba(255, 255, 255, 0.05);
+  --header-bg: rgba(20, 20, 20, 0.4);
+  /* Dots on dark */
+  --dot-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Light theme variables */
+[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #2d2a2b;
+
+  --muted-80: rgba(45, 42, 43, 0.8);
+  --muted-70: rgba(45, 42, 43, 0.7);
+  --muted-50: rgba(45, 42, 43, 0.5);
+  --border: rgba(45, 42, 43, 0.12);
+  --surface: #f3f3f3;
+  --soft: rgba(0, 0, 0, 0.05);
+  --header-bg: rgba(255, 255, 255, 0.7);
+  /* Dots on light */
+  --dot-color: rgba(20, 20, 20, 0.08);
 }
 
 /* Base */
@@ -20,16 +47,125 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 /* Decorative subtle background dots */
 .kb-bg {
-  background-image:
-    radial-gradient(50rem 30rem at 110% -10%, color-mix(in oklab, var(--kb-red) 18%, transparent) 0%, transparent 70%),
-    radial-gradient(30rem 20rem at -10% 100%, color-mix(in oklab, var(--kb-red) 12%, transparent) 0%, transparent 70%),
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
+  background-image: radial-gradient(
+      50rem 30rem at 110% -10%,
+      color-mix(in oklab, var(--kb-red) 18%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      30rem 20rem at -10% 100%,
+      color-mix(in oklab, var(--kb-red) 12%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(circle at 1px 1px, var(--dot-color) 1px, transparent 0);
   background-size: auto, auto, 22px 22px;
 }
 
+/* Smooth theme change animation */
+.theme-anim {
+  transition: background-color 300ms ease, color 300ms ease, filter 300ms ease;
+}
+
 /* Lightweight helpers without Tailwind @apply so CSS tools don't complain */
-.container-prose { max-width: 1100px; }
+.container-prose {
+  max-width: 1100px;
+}
+
+/* Utility classes used in markup (avoids @apply) */
+.section {
+  scroll-margin-top: 6rem;
+  padding: 5rem 0;
+}
+@media (min-width: 768px) {
+  .section {
+    padding: 7rem 0;
+  }
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+.pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.card {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(6px);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(20, 20, 20, 0.5);
+}
+
+/* Headings use Montserrat */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Typewriter caret */
+.type-caret {
+  position: relative;
+}
+
+/* Theme-aware utility classes */
+.text-muted {
+  color: var(--muted-70);
+}
+.text-muted-80 {
+  color: var(--muted-80);
+}
+.text-muted-50 {
+  color: var(--muted-50);
+}
+.border-themic {
+  border-color: var(--border) !important;
+}
+.bg-surface {
+  background-color: var(--surface) !important;
+}
+.bg-soft {
+  background-color: var(--soft) !important;
+}
+.bg-header {
+  background-color: var(--header-bg) !important;
+}
+.type-caret::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background-color: var(--kb-red);
+  margin-left: 4px;
+  vertical-align: -2px;
+  animation: blink 1s steps(1, end) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
