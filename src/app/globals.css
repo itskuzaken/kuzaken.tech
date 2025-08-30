@@ -21,6 +21,8 @@
   --header-bg: rgba(20, 20, 20, 0.4);
   /* Dots on dark */
   --dot-color: rgba(255, 255, 255, 0.06);
+  /* Soft hover for dark */
+  --soft-hover: rgba(255, 255, 255, 0.1);
 }
 
 /* Light theme variables */
@@ -37,6 +39,8 @@
   --header-bg: rgba(255, 255, 255, 0.7);
   /* Dots on light */
   --dot-color: rgba(20, 20, 20, 0.08);
+  /* Soft hover for light */
+  --soft-hover: rgba(0, 0, 0, 0.08);
 }
 
 /* Base */
@@ -92,19 +96,20 @@ body {
   display: inline-flex;
   align-items: center;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  background: var(--soft);
   padding: 0.25rem 0.75rem;
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--foreground);
+  opacity: 0.9;
 }
 .pill:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--soft-hover);
 }
 .card {
   border-radius: 0.75rem;
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--soft);
   padding: 1.5rem;
   box-shadow: 0 10px 20px rgba(20, 20, 20, 0.4);
   backdrop-filter: blur(6px);

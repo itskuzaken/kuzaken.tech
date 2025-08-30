@@ -50,7 +50,7 @@ export default function Home() {
       {/* About */}
       <section id="about" className="section">
         <h2 className="text-2xl md:text-3xl font-semibold">About Me</h2>
-        <p className="mt-4 text-white/80 max-w-3xl">
+        <p className="mt-4 text-muted-80 max-w-3xl">
           I’m an IT student and a multidisciplinary creator who thrives at the
           intersection of code and design. I enjoy building responsive web apps,
           crafting brand visuals, and bringing esports broadcasts to life
