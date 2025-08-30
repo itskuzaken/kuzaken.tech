@@ -7,8 +7,22 @@ export default function Home() {
     <main className="mx-auto max-w-6xl px-6">
       {/* Home / Landing */}
       <section id="home" className="section">
-        <div className="grid md:grid-cols-[1.2fr_0.8fr] items-center gap-10">
-          <div>
+        <div className="grid md:grid-cols-[1.2fr_0.8fr] items-center gap-8 md:gap-10">
+          {/* Image first on mobile */}
+          <div className="order-1 md:order-2 relative max-w-sm mx-auto md:ml-auto w-full">
+            <div className="absolute inset-1 rounded-2xl bg-gradient-to-br from-[#c22126]/70 via-transparent to-transparent" />
+            <div className="relative h-full w-full rounded-2xl border border-themic bg-soft backdrop-blur flex items-center justify-center">
+              <Image
+                src="/kenbaylon_image.png"
+                alt="Ken Baylon"
+                width={300}
+                height={300}
+                className="opacity-100"
+              />
+            </div>
+          </div>
+          {/* Text second on mobile */}
+          <div className="order-2 md:order-1 text-center md:text-left">
             <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
               Hi, I’m KUZAKEN —
               <span className="block text-[#c22126]">
@@ -21,7 +35,7 @@ export default function Home() {
                 />
               </span>
             </h1>
-            <p className="mt-4 text-muted-80 text-base md:text-lg max-w-2xl">
+            <p className="mt-4 text-muted-80 text-base md:text-lg max-w-2xl md:max-w-2xl mx-auto md:mx-0">
               I build digital experiences, create visuals that tell stories, and
               operate live broadcasts for esports events.
             </p>
@@ -31,18 +45,6 @@ export default function Home() {
             >
               See My Work
             </a>
-          </div>
-          <div className="relative aspect-auto max-w-sm ml-auto">
-            <div className="absolute inset-1 rounded-2xl bg-gradient-to-br from-[#c22126]/70 via-transparent to-transparent" />
-            <div className="relative h-full w-full rounded-2xl border border-themic bg-soft backdrop-blur flex items-center justify-center">
-              <Image
-                src="/kenbaylon_image.png"
-                alt="Ken Baylon"
-                width={300}
-                height={300}
-                className="opacity-100"
-              />
-            </div>
           </div>
         </div>
       </section>

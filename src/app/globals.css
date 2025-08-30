@@ -70,6 +70,9 @@ body {
     ),
     radial-gradient(circle at 1px 1px, var(--dot-color) 1px, transparent 0);
   background-size: auto, auto, 22px 22px;
+  /* Move only the dotted layer via CSS vars; keep first two fixed */
+  background-position: 0 0, 0 0, var(--dots-x, 0px) var(--dots-y, 0px);
+  will-change: background-position;
 }
 
 /* Floating blurred red circles (background orbs) */
@@ -79,6 +82,8 @@ body {
   pointer-events: none;
   z-index: -1; /* stay behind all content */
   overflow: hidden;
+  will-change: transform;
+  transform: translate3d(0,0,0);
 }
 .orb {
   position: absolute;
