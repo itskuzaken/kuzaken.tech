@@ -1,13 +1,15 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTheme } from "@/components/ThemeProvider";
 
 export default function Header() {
   const { theme, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("#home");
+  const sectionsRef = useRef([]);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -20,6 +22,42 @@ export default function Header() {
     const close = () => setMenuOpen(false);
     window.addEventListener("hashchange", close);
     return () => window.removeEventListener("hashchange", close);
+  }, []);
+
+  // Observe sections to highlight active link
+  useEffect(() => {
+    const ids = [
+      "#home",
+      "#about",
+      "#skills",
+      "#projects",
+      "#resume",
+      "#contact",
+    ];
+    const els = ids.map((id) => document.querySelector(id)).filter(Boolean);
+    sectionsRef.current = els;
+    if (!els.length) return;
+
+    // Scroll-based updater (robust for last section/contact)
+    const updateByScroll = () => {
+      const header = document.querySelector("header");
+      const offset = (header ? header.offsetHeight : 72) + 16; // extra padding for clarity
+      const y = window.scrollY + offset;
+      let current = "#home";
+      for (const el of els) {
+        if (el.offsetTop <= y) current = `#${el.id}`;
+      }
+      setActive(current);
+    };
+
+    // Drive active state purely by scroll/resize for consistency (last section friendly)
+    window.addEventListener("scroll", updateByScroll, { passive: true });
+    window.addEventListener("resize", updateByScroll);
+    updateByScroll();
+    return () => {
+      window.removeEventListener("scroll", updateByScroll);
+      window.removeEventListener("resize", updateByScroll);
+    };
   }, []);
 
   const logoSrc = useMemo(
@@ -59,15 +97,29 @@ export default function Header() {
             ["Projects", "#projects"],
             ["Resume", "#resume"],
             ["Contact", "#contact"],
-          ].map(([label, href]) => (
-            <Link
-              key={href}
-              href={href}
-              className="hover:text-red-500 transition-colors"
-            >
-              {label}
-            </Link>
-          ))}
+          ].map(([label, href]) => {
+            const isActive = active === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`relative transition-colors ${
+                  isActive ? "text-[#c22126]" : "hover:text-[#c22126]"
+                }`}
+                onClick={() => setActive(href)}
+              >
+                <span>{label}</span>
+                <span
+                  aria-hidden
+                  className={`absolute -bottom-1 left-0 h-[2px] w-full transition-opacity ${
+                    isActive
+                      ? "opacity-100 bg-[#c22126]"
+                      : "opacity-0 bg-transparent"
+                  }`}
+                />
+              </Link>
+            );
+          })}
           <button
             onClick={toggle}
             className={toggleClass}
@@ -91,8 +143,19 @@ export default function Header() {
         >
           <span className="sr-only">Menu</span>
           {/* Burger icon */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 6h18M3 12h18M3 18h18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
           </svg>
         </button>
       </div>
@@ -120,7 +183,9 @@ export default function Header() {
                 <span className="inline-block w-4 text-center" aria-hidden>
                   {theme === "dark" ? "🌙" : "☀️"}
                 </span>
-                <span className="text-xs">{theme === "dark" ? "Dark" : "Light"}</span>
+                <span className="text-xs">
+                  {theme === "dark" ? "Dark" : "Light"}
+                </span>
               </button>
             </div>
             <nav className="px-2 pb-3 text-sm text-muted-80">
@@ -131,16 +196,26 @@ export default function Header() {
                 ["Projects", "#projects"],
                 ["Resume", "#resume"],
                 ["Contact", "#contact"],
-              ].map(([label, href]) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="block rounded-xl px-4 py-3 hover:bg-soft hover:text-[var(--foreground)] transition-colors"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                </Link>
-              ))}
+              ].map(([label, href]) => {
+                const isActive = active === href;
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={`block rounded-xl px-4 py-3 transition-colors ${
+                      isActive
+                        ? "text-[#c22126]"
+                        : "hover:bg-soft hover:text-[var(--foreground)]"
+                    }`}
+                    onClick={() => {
+                      setActive(href);
+                      setMenuOpen(false);
+                    }}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         </div>

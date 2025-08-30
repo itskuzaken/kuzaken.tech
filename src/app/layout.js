@@ -3,6 +3,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import ScrollEffects from "@/components/ScrollEffects";
+import BackgroundOrbs from "@/components/BackgroundOrbs";
 
 const montserrat = Montserrat({
   variable: "--font-heading",
@@ -31,6 +33,8 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider>
           <Header />
+          <BackgroundOrbs />
+          <ScrollEffects />
           {children}
           <Footer />
         </ThemeProvider>

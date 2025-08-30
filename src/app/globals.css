@@ -72,6 +72,55 @@ body {
   background-size: auto, auto, 22px 22px;
 }
 
+/* Floating blurred red circles (background orbs) */
+.kb-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1; /* stay behind all content */
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  background: #c22126;
+  filter: blur(36px);
+  opacity: 0.28;
+  border-radius: 9999px;
+  will-change: transform;
+  animation-duration: 26s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+.orb--sm { width: 220px; height: 220px; left: -60px; top: 10%; animation-name: float-a; }
+.orb--md { width: 320px; height: 320px; left: 55%; top: 35%; animation-name: float-b; }
+.orb--lg { width: 420px; height: 420px; right: -120px; bottom: -60px; animation-name: float-c; }
+
+/* Light mode: reduce intensity slightly to avoid overpowering */
+[data-theme="light"] .orb { opacity: 0.18; filter: blur(40px); }
+
+/* Keyframes with organic, non-linear paths */
+@keyframes float-a {
+  0%   { transform: translate3d(0, 0, 0)      scale(1); }
+  25%  { transform: translate3d(12vw, -3vh, 0) scale(1.05); }
+  50%  { transform: translate3d(4vw, 8vh, 0)   scale(0.98); }
+  75%  { transform: translate3d(16vw, 4vh, 0)  scale(1.03); }
+  100% { transform: translate3d(0, 0, 0)      scale(1); }
+}
+@keyframes float-b {
+  0%   { transform: translate3d(0, 0, 0)      scale(1); }
+  20%  { transform: translate3d(-10vw, 3vh, 0) scale(1.02); }
+  50%  { transform: translate3d(6vw, -6vh, 0)  scale(1.04); }
+  80%  { transform: translate3d(-4vw, 5vh, 0)  scale(0.99); }
+  100% { transform: translate3d(0, 0, 0)      scale(1); }
+}
+@keyframes float-c {
+  0%   { transform: translate3d(0, 0, 0)      scale(1); }
+  30%  { transform: translate3d(-8vw, -4vh, 0) scale(1.03); }
+  55%  { transform: translate3d(-2vw, 7vh, 0)  scale(1.01); }
+  85%  { transform: translate3d(-12vw, 2vh, 0) scale(1.05); }
+  100% { transform: translate3d(0, 0, 0)      scale(1); }
+}
+
 /* Smooth theme change animation */
 .theme-anim {
   transition: background-color 300ms ease, color 300ms ease, filter 300ms ease;
@@ -107,17 +156,30 @@ body {
   background: var(--soft-hover);
 }
 .card {
+  position: relative;
   border-radius: 0.75rem;
   border: 1px solid var(--border);
-  background: var(--soft);
+  background: var(--header-bg);
   padding: 1.5rem;
-  box-shadow: 0 10px 20px rgba(20, 20, 20, 0.4);
+  box-shadow: 0 10px 20px rgba(20, 20, 20, 0.3);
   backdrop-filter: blur(6px);
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(20, 20, 20, 0.5);
+  box-shadow: 0 16px 32px rgba(20, 20, 20, 0.45);
+}
+
+/* Red accent variants */
+.card--accent:hover {
+  box-shadow: 0 16px 32px rgba(20, 20, 20, 0.45), 0 0 0 1px #c22126 inset,
+    0 8px 24px rgba(194, 33, 38, 0.15);
+}
+
+.accent-title {
+  display: inline-block;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #c22126;
 }
 
 /* Headings use Montserrat */
@@ -173,4 +235,16 @@ h6 {
   50% {
     opacity: 0;
   }
+}
+
+/* Section reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 420ms ease, transform 420ms ease;
+  will-change: opacity, transform;
+}
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
 }

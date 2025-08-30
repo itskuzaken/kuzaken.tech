@@ -27,12 +27,12 @@ export default function Home() {
             </p>
             <a
               href="#projects"
-              className="mt-8 inline-flex items-center rounded-full bg-[#c22126] px-6 py-3 text-white font-medium transition-colors hover:bg-white hover:text-[#141414]"
+              className="mt-8 inline-flex items-center rounded-xl bg-[#c22126] px-6 py-3 text-white font-medium transition-colors hover:bg-white hover:text-[#141414]"
             >
               See My Work
             </a>
           </div>
-          <div className="relative aspect-square max-w-sm md:ml-auto">
+          <div className="relative aspect-auto max-w-sm ml-auto">
             <div className="absolute inset-1 rounded-2xl bg-gradient-to-br from-[#c22126]/70 via-transparent to-transparent" />
             <div className="relative h-full w-full rounded-2xl border border-themic bg-soft backdrop-blur flex items-center justify-center">
               <Image
@@ -62,8 +62,10 @@ export default function Home() {
       <section id="skills" className="section">
         <h2 className="text-2xl md:text-3xl font-semibold">Skills & Tools</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          <div className="card">
-            <h3 className="text-lg font-semibold">Web Development</h3>
+          <div className="card card--accent">
+            <h3 className="text-lg font-semibold accent-title">
+              Web Development
+            </h3>
             <p className="mt-2 text-muted text-sm">
               React, Tailwind CSS, HTML, CSS, JavaScript, Node.js, Express,
               MySQL, PostgreSQL, Firebase, Vercel, Railway
@@ -86,8 +88,10 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="card">
-            <h3 className="text-lg font-semibold">Graphics & Layout Design</h3>
+          <div className="card card--accent">
+            <h3 className="text-lg font-semibold accent-title">
+              Graphics & Layout Design
+            </h3>
             <p className="mt-2 text-muted text-sm">
               Posters, branding, layouts | Photoshop, Illustrator, Figma, Canva
             </p>
@@ -99,8 +103,10 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="card">
-            <h3 className="text-lg font-semibold">Broadcast Operations</h3>
+          <div className="card card--accent">
+            <h3 className="text-lg font-semibold accent-title">
+              Broadcast Operations
+            </h3>
             <p className="mt-2 text-muted text-sm">
               Esports event coverage | OBS Studio, vMix, Streamlabs | Roles:
               overlays, switching, monitoring
@@ -143,7 +149,7 @@ export default function Home() {
                   tech: "React Native, Firebase",
                 },
               ].map((p) => (
-                <article key={p.title} className="card">
+                <article key={p.title} className="card card--accent">
                   <div className="h-36 rounded-md bg-soft border border-themic" />
                   <h4 className="mt-4 font-medium">{p.title}</h4>
                   <p className="mt-1 text-sm text-muted">{p.desc}</p>
@@ -165,7 +171,7 @@ export default function Home() {
             </h3>
             <div className="mt-4 grid gap-6 md:grid-cols-3">
               {["Posters", "Event Graphics", "Branding Layouts"].map((t) => (
-                <article key={t} className="card">
+                <article key={t} className="card card--accent">
                   <div className="h-36 rounded-md bg-soft border border-themic" />
                   <h4 className="mt-4 font-medium">{t}</h4>
                   <p className="mt-1 text-sm text-muted">
@@ -186,7 +192,7 @@ export default function Home() {
                 "Tournament Coverage",
                 "Live Switching",
               ].map((t) => (
-                <article key={t} className="card">
+                <article key={t} className="card card--accent">
                   <div className="h-36 rounded-md bg-soft border border-themic" />
                   <h4 className="mt-4 font-medium">{t}</h4>
                   <p className="mt-1 text-sm text-muted">
@@ -205,14 +211,14 @@ export default function Home() {
           Resume / Experience
         </h2>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <div className="card">
-            <h3 className="font-semibold">Education</h3>
+          <div className="card card--accent">
+            <h3 className="font-semibold accent-title">Education</h3>
             <p className="mt-2 text-muted-80">
               BSIT – STI West Negros University (Expected 2025)
             </p>
           </div>
-          <div className="card">
-            <h3 className="font-semibold">Notable Work</h3>
+          <div className="card card--accent">
+            <h3 className="font-semibold accent-title">Notable Work</h3>
             <ul className="mt-2 text-muted-80 list-disc pl-5 space-y-1 text-sm">
               <li>Capstone: RedVault</li>
               <li>Freelance design projects</li>

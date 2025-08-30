@@ -10,7 +10,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
+    <form onSubmit={onSubmit} className="space-y-4 card card--accent">
       <div className="grid md:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs uppercase tracking-wide text-muted">
