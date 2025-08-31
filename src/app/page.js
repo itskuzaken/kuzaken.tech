@@ -2,6 +2,7 @@ import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 import Typewriter from "@/components/Typewriter";
 import InteractiveTilt from "@/components/InteractiveTilt";
+import SkillsTabs from "@/components/SkillsTabs";
 
 export default function Home() {
   return (
@@ -52,7 +53,7 @@ export default function Home() {
                   className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-xl social-btn cursor-pointer"
                 >
                   <Image
-                    src="/social-logos/facebook.svg"
+                    src="/social-icons/facebook.svg"
                     alt="Facebook"
                     width={24}
                     height={24}
@@ -67,7 +68,7 @@ export default function Home() {
                   className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-xl social-btn cursor-pointer"
                 >
                   <Image
-                    src="/social-logos/instagram.svg"
+                    src="/social-icons/instagram.svg"
                     alt="Instagram"
                     width={24}
                     height={24}
@@ -82,7 +83,7 @@ export default function Home() {
                   className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-xl social-btn cursor-pointer"
                 >
                   <Image
-                    src="/social-logos/tiktok.svg"
+                    src="/social-icons/tiktok.svg"
                     alt="TikTok"
                     width={24}
                     height={24}
@@ -97,7 +98,7 @@ export default function Home() {
                   className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-xl social-btn cursor-pointer"
                 >
                   <Image
-                    src="/social-logos/github.svg"
+                    src="/social-icons/github.svg"
                     alt="GitHub"
                     width={24}
                     height={24}
@@ -130,64 +131,9 @@ export default function Home() {
       {/* Skills */}
       <section id="skills" className="section">
         <h2 className="text-2xl md:text-3xl font-semibold">Skills & Tools</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          <div className="card card--accent">
-            <h3 className="text-lg font-semibold accent-title">
-              Web Development
-            </h3>
-            <p className="mt-2 text-muted text-sm">
-              React, Tailwind CSS, HTML, CSS, JavaScript, Node.js, Express,
-              MySQL, PostgreSQL, Firebase, Vercel, Railway
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {[
-                "React",
-                "Tailwind",
-                "Node.js",
-                "Express",
-                "MySQL",
-                "PostgreSQL",
-                "Firebase",
-                "Vercel",
-                "Railway",
-              ].map((t) => (
-                <span key={t} className="pill">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="card card--accent">
-            <h3 className="text-lg font-semibold accent-title">
-              Graphics & Layout Design
-            </h3>
-            <p className="mt-2 text-muted text-sm">
-              Posters, branding, layouts | Photoshop, Illustrator, Figma, Canva
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {["Photoshop", "Illustrator", "Figma", "Canva"].map((t) => (
-                <span key={t} className="pill">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="card card--accent">
-            <h3 className="text-lg font-semibold accent-title">
-              Broadcast Operations
-            </h3>
-            <p className="mt-2 text-muted text-sm">
-              Esports event coverage | OBS Studio, vMix, Streamlabs | Roles:
-              overlays, switching, monitoring
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {["OBS Studio", "vMix", "Streamlabs"].map((t) => (
-                <span key={t} className="pill">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
+        <p className="mt-2 text-muted-80 text-sm">Explore by category.</p>
+        <div className="mt-6">
+          <SkillsTabs />
         </div>
       </section>
 

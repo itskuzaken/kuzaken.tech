@@ -211,6 +211,16 @@ body {
 .pill:hover {
   background: var(--soft-hover);
 }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  font-size: 0.7rem;
+  color: var(--muted-80);
+}
 .card {
   position: relative;
   border-radius: 0.75rem;
@@ -230,6 +240,15 @@ body {
 .card--accent:hover {
   box-shadow: 0 16px 32px rgba(20, 20, 20, 0.45), 0 0 0 1px #c22126 inset,
     0 8px 24px rgba(194, 33, 38, 0.15);
+}
+
+/* Skills tool cards: smoother, subtle scale with red glow from .card--accent */
+.tool-card {
+  transition: transform 300ms ease, box-shadow 300ms ease,
+    background-color 300ms ease;
+}
+.tool-card:hover {
+  transform: translateY(-2px) scale(1.02);
 }
 
 .accent-title {
@@ -345,4 +364,57 @@ h6 {
   100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
+}
+
+/* Tabs styling for Skills section */
+.tabs-nav {
+  border-bottom: 1px solid var(--border);
+}
+.tab-btn {
+  white-space: nowrap;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  color: var(--muted-80);
+  background: transparent;
+  transition: color 200ms ease, background-color 200ms ease,
+    border-color 200ms ease, transform 200ms ease;
+}
+.tab-btn:hover {
+  color: var(--foreground);
+  background: var(--soft);
+  border-color: var(--border);
+}
+.tab-btn--active {
+  color: var(--foreground);
+  background: var(--header-bg);
+  border-color: var(--border);
+  box-shadow: 0 6px 12px rgba(20, 20, 20, 0.25), 0 0 0 1px #c22126 inset,
+    0 8px 22px rgba(194, 33, 38, 0.12);
+}
+
+.tab-panel {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+.tab-panel.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Small badge for tool subtitle */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.7rem;
+  line-height: 1;
+  color: var(--muted-80);
+  border: 1px solid var(--border);
+  background: var(--soft);
+}
+.badge + .badge {
+  margin-left: 0.25rem;
 }
