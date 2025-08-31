@@ -85,6 +85,7 @@ export default function Header() {
             alt="Kuzaken Logo"
             width={160}
             height={40}
+            style={{ height: "auto" }}
             priority
           />
         </Link>

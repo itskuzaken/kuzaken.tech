@@ -15,7 +15,7 @@ export default function Home() {
             <div className="absolute inset-1 rounded-2xl bg-gradient-to-br from-[#c22126]/70 via-transparent to-transparent" />
             <InteractiveTilt className="relative h-full w-full rounded-2xl border border-themic bg-soft backdrop-blur flex items-center justify-center">
               <Image
-                src="/kenbaylon_image.png"
+                src="/photos/kenbaylon_image.png"
                 alt="Ken Francen Baylon Image"
                 width={250}
                 height={250}
@@ -120,12 +120,142 @@ export default function Home() {
       {/* About */}
       <section id="about" className="section">
         <h2 className="text-2xl md:text-3xl font-semibold">About Me</h2>
-        <p className="mt-4 text-muted-80 max-w-3xl">
-          I’m an IT student and a multidisciplinary creator who thrives at the
-          intersection of code and design. I enjoy building responsive web apps,
-          crafting brand visuals, and bringing esports broadcasts to life
-          through clean visuals and smooth live operation.
-        </p>
+
+        {/* Two-column: image left, text right (stacks on mobile) */}
+        <div className="mt-6 grid gap-8 md:grid-cols-2 md:items-center">
+          {/* Left: image with tilt, responsive height (no enforced 1:1) */}
+          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto">
+            <InteractiveTilt className="relative w-full h-64 sm:h-72 md:h-80 rounded-2xl border border-themic bg-soft overflow-hidden">
+              <Image
+                src="/photos/picture1.jpg"
+                alt="Portrait of Ken Francen Baylon"
+                fill
+                sizes="(max-width: 768px) 80vw, (max-width: 1200px) 40vw, 400px"
+                className="object-cover select-none"
+              />
+            </InteractiveTilt>
+          </div>
+
+          {/* Right: text content */}
+          <div className="text-muted-80 max-w-3xl space-y-4">
+            <p>
+              Hello, I’m{" "}
+              <span className="font-semibold">Ken Francen G. Baylon</span>, an
+              IT student and tech enthusiast with a passion for both development
+              and design. My work bridges three areas:{" "}
+              <span className="highlight">web development</span>,{" "}
+              <span className="highlight">graphic/layout design</span>, and{" "}
+              <span className="highlight">live broadcast operations</span>.
+            </p>
+            <p>
+              On the development side, I enjoy building full-stack applications
+              that solve real problems, from websites to mobile apps. In design,
+              I’ve created posters, layouts, and branding materials that connect
+              with audiences visually. Beyond that, I also work in live
+              production, where I operate esports broadcasts and manage live
+              event streams.
+            </p>
+            <p>
+              What excites me most is the mix of creativity and technical
+              problem-solving. Whether I’m coding, designing, or handling a live
+              show, I focus on delivering work that’s{" "}
+              <span className="font-medium">clean</span>,{" "}
+              <span className="font-medium">functional</span>, and{" "}
+              <span className="font-medium">engaging</span>.
+            </p>
+          </div>
+        </div>
+
+        {/* Quick Snapshot cards: separate row below the two-column layout */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {/* Full‑Stack Development */}
+          <div className="card card--accent">
+            <div className="flex items-start gap-3">
+              {/* Custom lightweight SVG (code brackets) */}
+              <svg
+                viewBox="0 0 24 24"
+                className="w-7 h-7 text-[#c22126] shrink-0"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M9 18l-6-6 6-6" />
+                <path d="M15 6l6 6-6 6" />
+              </svg>
+              <div>
+                <h3 className="font-medium">Full‑Stack Development</h3>
+                <ul className="mt-1 text-sm text-muted space-y-1 list-none">
+                  <li>• Websites with Next.js + Tailwind</li>
+                  <li>• APIs with Node.js/Express</li>
+                  <li>• Mobile apps (React Native basics)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Design & Layout */}
+          <div className="card card--accent">
+            <div className="flex items-start gap-3">
+              {/* Custom lightweight SVG (layout grid) */}
+              <svg
+                viewBox="0 0 24 24"
+                className="w-7 h-7 text-[#c22126] shrink-0"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <path d="M3 10h18" />
+                <path d="M10 10v10" />
+              </svg>
+              <div>
+                <h3 className="font-medium">Design & Layout</h3>
+                <ul className="mt-1 text-sm text-muted space-y-1 list-none">
+                  <li>• Posters, social graphics, layouts</li>
+                  <li>• Branding and visual identity</li>
+                  <li>• Tools: Photoshop, Illustrator, Figma</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Live Broadcast Ops */}
+          <div className="card card--accent">
+            <div className="flex items-start gap-3">
+              {/* Custom lightweight SVG (broadcast/waves) */}
+              <svg
+                viewBox="0 0 24 24"
+                className="w-7 h-7 text-[#c22126] shrink-0"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="2" />
+                <path d="M4.9 4.9a10 10 0 010 14.2" />
+                <path d="M19.1 19.1a10 10 0 000-14.2" />
+                <path d="M7.8 7.8a6 6 0 010 8.4" />
+                <path d="M16.2 16.2a6 6 0 000-8.4" />
+              </svg>
+              <div>
+                <h3 className="font-medium">Live Broadcast Ops</h3>
+                <ul className="mt-1 text-sm text-muted space-y-1 list-none">
+                  <li>• Esports streams and event coverage</li>
+                  <li>• Scene switching, overlays, monitoring</li>
+                  <li>• Tools: OBS, vMix, Streamlabs</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Skills */}

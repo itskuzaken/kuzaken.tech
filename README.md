@@ -26,6 +26,7 @@ A modern, responsive personal portfolio for Ken Francen G. Baylon (KUZAKEN). Bui
 ## Installation & Setup
 
 Prerequisites
+
 - Node.js 18.18+ or 20+
 
 Clone and install

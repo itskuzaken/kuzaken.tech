@@ -418,3 +418,45 @@ h6 {
 .badge + .badge {
   margin-left: 0.25rem;
 }
+
+/* Inline highlight for key terms */
+.highlight {
+  color: var(--kb-red);
+  font-weight: 600;
+}
+
+/* Optional subdued tagline style */
+.tagline {
+  color: var(--muted-70);
+}
+
+/* Timeline (About section) */
+.timeline {
+  position: relative;
+  margin-left: 0.75rem; /* space for dots */
+  padding-left: 0.75rem;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.1rem;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 2px;
+  background: var(--border);
+  border-radius: 1px;
+}
+.timeline-item {
+  position: relative;
+  padding-left: 0.75rem;
+}
+.timeline-dot {
+  position: absolute;
+  left: -0.25rem;
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  background: var(--kb-red);
+  border-radius: 9999px;
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--kb-red) 20%, transparent);
+}
