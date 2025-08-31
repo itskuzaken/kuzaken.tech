@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 import Typewriter from "@/components/Typewriter";
+import InteractiveTilt from "@/components/InteractiveTilt";
 
 export default function Home() {
   return (
@@ -9,17 +10,19 @@ export default function Home() {
       <section id="home" className="section">
         <div className="grid md:grid-cols-[1.2fr_0.8fr] items-center gap-8 md:gap-10">
           {/* Image first on mobile */}
-          <div className="order-1 md:order-2 relative max-w-sm mx-auto md:ml-auto w-full">
+          <div className="order-1 md:order-2 relative max-w-xs mx-auto md:ml-auto w-full">
             <div className="absolute inset-1 rounded-2xl bg-gradient-to-br from-[#c22126]/70 via-transparent to-transparent" />
-            <div className="relative h-full w-full rounded-2xl border border-themic bg-soft backdrop-blur flex items-center justify-center">
+            <InteractiveTilt className="relative h-full w-full rounded-2xl border border-themic bg-soft backdrop-blur flex items-center justify-center">
               <Image
                 src="/kenbaylon_image.png"
-                alt="Ken Baylon"
-                width={300}
-                height={300}
-                className="opacity-100"
+                alt="Ken Francen Baylon Image"
+                width={250}
+                height={250}
+                className="opacity-100 select-none"
+                draggable={false}
+                priority
               />
-            </div>
+            </InteractiveTilt>
           </div>
           {/* Text second on mobile */}
           <div className="order-2 md:order-1 text-center md:text-left">

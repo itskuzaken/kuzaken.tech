@@ -4,30 +4,38 @@ import { useEffect, useRef } from "react";
 export default function BackgroundOrbs() {
   useEffect(() => {
     // Apply parallax to dotted background (kb-bg) via CSS variables
-    const dotted = document.querySelector('.kb-bg') || document.body;
-  if (!dotted) return;
+    const dotted = document.querySelector(".kb-bg") || document.body;
+    if (!dotted) return;
 
-  // Enable only on hover-capable fine pointers (desktop, laptops with mouse)
-  const canHoverFine = window.matchMedia?.("(hover: hover) and (pointer: fine)").matches;
-  if (!canHoverFine) return;
+    // Enable only on hover-capable fine pointers (desktop, laptops with mouse)
+    const canHoverFine = window.matchMedia?.(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
+    if (!canHoverFine) return;
 
     let raf = 0;
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
     let currentY = 0;
-  const maxShiftX = 28; // px, still subtle but more noticeable
-  const maxShiftY = 18; // px
-  const ease = 0.12; // smoothing factor
+    const maxShiftX = 28; // px, still subtle but more noticeable
+    const maxShiftY = 18; // px
+    const ease = 0.12; // smoothing factor
 
     const animate = () => {
       currentX += (targetX - currentX) * ease;
       currentY += (targetY - currentY) * ease;
-  dotted.style.setProperty('--dots-x', `${currentX.toFixed(2)}px`);
-  dotted.style.setProperty('--dots-y', `${currentY.toFixed(2)}px`);
-  // Also set on html as fallback in some UA computations
-  document.documentElement.style.setProperty('--dots-x', `${currentX.toFixed(2)}px`);
-  document.documentElement.style.setProperty('--dots-y', `${currentY.toFixed(2)}px`);
+      dotted.style.setProperty("--dots-x", `${currentX.toFixed(2)}px`);
+      dotted.style.setProperty("--dots-y", `${currentY.toFixed(2)}px`);
+      // Also set on html as fallback in some UA computations
+      document.documentElement.style.setProperty(
+        "--dots-x",
+        `${currentX.toFixed(2)}px`
+      );
+      document.documentElement.style.setProperty(
+        "--dots-y",
+        `${currentY.toFixed(2)}px`
+      );
       raf = requestAnimationFrame(animate);
     };
 
@@ -56,10 +64,10 @@ export default function BackgroundOrbs() {
       cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
-  dotted.style.removeProperty('--dots-x');
-  dotted.style.removeProperty('--dots-y');
-  document.documentElement.style.removeProperty('--dots-x');
-  document.documentElement.style.removeProperty('--dots-y');
+      dotted.style.removeProperty("--dots-x");
+      dotted.style.removeProperty("--dots-y");
+      document.documentElement.style.removeProperty("--dots-x");
+      document.documentElement.style.removeProperty("--dots-y");
     };
   }, []);
 

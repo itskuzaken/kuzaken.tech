@@ -70,6 +70,80 @@
 			],
 			"isBackground": false,
 			"group": "build"
+		},
+		{
+			"label": "Git Status (pre-commit)",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"--porcelain=v1"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Git Commit (push dots parallax)",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"commit",
+				"-m",
+				"feat(bg): parallax cursor effect on dotted background; improve detection; tune easing and range"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Git Push (origin master)",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"push",
+				"-u",
+				"origin",
+				"master"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Git Status",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"--porcelain=v1"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Git Add Commit Push (tilt)",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"bash",
+				"-lc",
+				"git add -A && git commit -m \"feat(home): interactive tilt + glow on profile image; touch tap-bounce; CSS helpers\" || echo \"No new commit\" && git push -u origin master"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
 		}
 	]
 }
