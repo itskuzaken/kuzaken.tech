@@ -305,6 +305,21 @@ h6 {
   transform: translateY(0);
 }
 
+.social-btn {
+  background: var(--header-bg);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 12px rgba(20, 20, 20, 0.3);
+  transition: transform 300ms ease, box-shadow 300ms ease,
+    background-color 300ms ease;
+  will-change: transform;
+}
+.social-btn:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(20, 20, 20, 0.4), 0 0 0 1px #c22126 inset,
+    0 8px 22px rgba(194, 33, 38, 0.22);
+}
+
 .tilt-wrap {
   perspective: 1000px;
 }

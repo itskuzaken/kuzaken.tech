@@ -28,7 +28,7 @@ export default function Home() {
           <div className="order-2 md:order-1 text-center md:text-left">
             <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
               Hi, I’m KUZAKEN —
-              <span className="block text-[#c22126]">
+              <span className="block text-[#c22126] text-2xl md:text-4xl">
                 <Typewriter
                   words={[
                     "Web Developer",
@@ -42,12 +42,76 @@ export default function Home() {
               I build digital experiences, create visuals that tell stories, and
               operate live broadcasts for esports events.
             </p>
-            <a
-              href="#projects"
-              className="mt-8 inline-flex items-center rounded-xl bg-[#c22126] px-6 py-3 text-white font-medium transition-colors hover:bg-white hover:text-[#141414]"
-            >
-              See My Work
-            </a>
+            <div className="mt-6 flex flex-col items-center md:items-start">
+              <div className="mb-4 flex items-center justify-center gap-4">
+                <a
+                  href="https://www.facebook.com/kenfgbaylon/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-xl social-btn cursor-pointer"
+                >
+                  <Image
+                    src="/social-logos/facebook.svg"
+                    alt="Facebook"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 md:w-7 md:h-7 select-none social-icon"
+                  />
+                </a>
+                <a
+                  href="https://www.instagram.com/kenfgbyln/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-xl social-btn cursor-pointer"
+                >
+                  <Image
+                    src="/social-logos/instagram.svg"
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 md:w-7 md:h-7 select-none social-icon"
+                  />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@itskuzaken"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-xl social-btn cursor-pointer"
+                >
+                  <Image
+                    src="/social-logos/tiktok.svg"
+                    alt="TikTok"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 md:w-7 md:h-7 select-none social-icon"
+                  />
+                </a>
+                <a
+                  href="https://github.com/itskuzaken"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-xl social-btn cursor-pointer"
+                >
+                  <Image
+                    src="/social-logos/github.svg"
+                    alt="GitHub"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 md:w-7 md:h-7 select-none social-icon"
+                  />
+                </a>
+              </div>
+              <a
+                href="#projects"
+                className="inline-flex items-center rounded-xl bg-[#c22126] px-6 py-3 text-white font-medium transition-colors hover:bg-white hover:text-[#141414]"
+              >
+                See My Work
+              </a>
+            </div>
           </div>
         </div>
       </section>
