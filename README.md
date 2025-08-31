@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## kuzaken.tech — Personal Portfolio & E‑Portfolio (Next.js)
 
-## Getting Started
+A modern, responsive personal portfolio for Ken Francen G. Baylon (KUZAKEN). Built with Next.js (App Router) and Tailwind CSS, it showcases skills, projects, resume, and contact information with light/dark themes, smooth interactions, and accessible design.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Polished, responsive layout with sticky header and mobile navigation
+- Light/Dark theme toggle with smooth, animated transitions
+- Hero headline with typewriter effect
+- Section reveal animations and smooth in-page anchor scrolling (header offset aware)
+- Dotted background with subtle parallax motion on cursor; optional red background orbs
+- Interactive tilt/glow effect on profile image
+- Social icon buttons with card-like styling and red hover glow
+- Skills section with Category Tabs (Web Development, Graphics & Layout Design, Broadcast Operations) and per-tool cards (icon, name, subtitle)
+- Themed cards (transparent with red accent on hover)
+- Accessible markup, keyboard-friendly tabs, and alt/aria labels
+
+## Tech Stack
+
+- Framework: Next.js 15 (App Router) with Turbopack
+- UI: Tailwind CSS v4
+- Language: JavaScript (React 19)
+- Fonts: Montserrat (headings), Open Sans (body) via `next/font`
+- State/Theme: Lightweight ThemeProvider using `localStorage` + CSS variables
+
+## Installation & Setup
+
+Prerequisites
+- Node.js 18.18+ or 20+
+
+Clone and install
+
+```powershell
+git clone https://github.com/itskuzaken/kuzaken.tech.git
+cd kuzaken.tech
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run in development
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```powershell
+npm run dev
+# Open http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Build and start (production)
 
-## Learn More
+```powershell
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Content: Update copy in `src/app/page.js` (sections: Home, About, Skills, Projects, Resume, Contact).
+- Skills: Edit categories/tools in `src/components/SkillsTabs.js` (icon files in `public/tools-icons/`).
+- Theme: Theme tokens and utilities live in `src/app/globals.css` and `src/components/ThemeProvider.js`.
+- Header/Footer: Edit navigation and footer links in `src/components/Header.js` and `src/components/Footer.js`.
+- Assets: Replace images/logos under `public/` as needed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Screenshots / Demo
 
-## Deploy on Vercel
+> Add screenshots to `public/screenshots/` and reference them here, or include a live demo link if deployed (e.g., Vercel).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```markdown
+![Home](public/screenshots/home.png)
+![Skills](public/screenshots/skills.png)
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Demo (optional)
+
+- Live: https://your-demo-url.example (update if deployed)
+
+## Project Structure
+
+```text
+.
+├─ public/
+│  ├─ tools-icons/            # SVG icons for tools (React, Tailwind, Node, etc.)
+│  ├─ social-icons/           # Social media SVG icons
+│  └─ ...                     # Logos, favicon, images
+├─ src/
+│  ├─ app/
+│  │  ├─ layout.js            # Root layout with ThemeProvider, Header, Footer
+│  │  ├─ page.js              # Portfolio sections (Home, About, Skills, Projects, Resume, Contact)
+│  │  └─ globals.css          # Theme tokens, utilities, animations, card styles
+│  └─ components/
+│     ├─ Header.js            # Sticky header, active link detection, theme toggle
+│     ├─ Footer.js            # Themed footer
+│     ├─ ThemeProvider.js     # Theme context + localStorage persistence
+│     ├─ Typewriter.js        # Typewriter headline effect
+│     ├─ ScrollEffects.js     # Smooth anchor scroll + section reveal animations
+│     ├─ BackgroundOrbs.js    # Optional blurred red orbs + dots parallax control
+│     ├─ InteractiveTilt.js   # Hover tilt + glow effect for images/cards
+│     └─ SkillsTabs.js        # Category Tabs for Skills with tool cards
+├─ package.json               # Scripts (dev/build/start) using Turbopack
+└─ next.config.js             # Next.js configuration (incl. outputFileTracingRoot)
+```
+
+## Contributors
+
+- Ken Francen G. Baylon (KUZAKEN) — https://github.com/itskuzaken
+
+## License
+
+This repository is currently unlicensed (All rights reserved). If you intend to open-source it, consider adding a license file (e.g., MIT) and updating this section.
