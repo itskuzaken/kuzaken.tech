@@ -1,11 +1,20 @@
 import Link from "next/link";
+import pkg from "../../package.json" assert { type: "json" };
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const version = (pkg && pkg.version) || pkg?.default?.version || "";
   return (
     <footer className="mt-20 border-t border-themic bg-header">
       <div className="mx-auto max-w-6xl px-6 py-10 text-sm text-muted flex flex-col md:flex-row items-center justify-between gap-4">
-        <p>© {year} KUZAKEN. All Rights Reserved.</p>
+        <p>
+          © {year} KUZAKEN. All Rights Reserved.
+          {version ? (
+            <span className="ml-2 text-xs text-muted-50 align-middle">
+              v{version}
+            </span>
+          ) : null}
+        </p>
         <div className="flex items-center gap-4">
           {/* Replace # with your actual profiles */}
 

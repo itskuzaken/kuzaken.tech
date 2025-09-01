@@ -158,6 +158,7 @@ export default function Header() {
             height={40}
             priority
             sizes="(max-width: 768px) 160px, 160px"
+            style={{ height: "auto" }}
           />
         </Link>
         {/* Desktop / Tablet nav */}

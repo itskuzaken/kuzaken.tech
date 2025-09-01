@@ -4,48 +4,6 @@ import Typewriter from "@/components/Typewriter";
 import InteractiveTilt from "@/components/InteractiveTilt";
 import SkillsTabs from "@/components/SkillsTabs";
 
-// Dynamic metadata for the home page: OG + Twitter with image fallbacks
-export async function generateMetadata() {
-  const base = new URL("https://kuzaken.tech");
-  const title = "KUZAKEN.TECH";
-  const description =
-    "E-Portfolio of Ken Francen G. Baylon – development, design, and broadcast operations.";
-
-  // Prioritize dynamic image generator, then static fallback, then hero image as last resort
-  const imageCandidates = [
-    "/opengraph-image",
-    "/og.png",
-    "/photos/kenbaylon_image.png",
-  ];
-
-  const ogImages = imageCandidates.map((u) => ({
-    url: u,
-    width: 1200,
-    height: 630,
-    alt: "KUZAKEN.TECH preview",
-  }));
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      url: base.href,
-      siteName: "KUZAKEN.TECH",
-      images: ogImages,
-      type: "website",
-      locale: "en_US",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [imageCandidates[0]],
-    },
-  };
-}
-
 export default function Home() {
   return (
     <main
@@ -74,6 +32,7 @@ export default function Home() {
                 height={250}
                 className="opacity-100 select-none"
                 draggable={false}
+                style={{ height: "auto" }}
                 priority
               />
             </InteractiveTilt>
