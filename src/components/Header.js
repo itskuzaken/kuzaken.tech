@@ -85,8 +85,8 @@ export default function Header() {
             alt="Kuzaken Logo"
             width={160}
             height={40}
-            style={{ height: "auto" }}
             priority
+            sizes="(max-width: 768px) 160px, 160px"
           />
         </Link>
         {/* Desktop / Tablet nav */}
@@ -108,6 +108,7 @@ export default function Header() {
                   isActive ? "text-[#c22126]" : "hover:text-[#c22126]"
                 }`}
                 onClick={() => setActive(href)}
+                aria-current={isActive ? "page" : undefined}
               >
                 <span>{label}</span>
                 <span
