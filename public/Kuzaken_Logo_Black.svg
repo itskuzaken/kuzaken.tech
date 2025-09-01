@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 173.01 228.43">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #c22126;
+      }
+
+      .cls-2 {
+        fill: #2d2a2b;
+      }
+    </style>
+  </defs>
+  <g id="BLACK_LOGO" data-name="BLACK LOGO">
+    <g>
+      <polyline class="cls-2" points="150.14 104.39 150.14 0 104.39 0 104.39 79.26 68.63 91.5 68.63 0 0 0 22.88 22.88 22.88 228.43 68.63 228.43 68.63 137.25"/>
+      <path class="cls-1" d="M173.01,228.43l-22.87-22.88v-57.43c-6.67-3.88-8.37-4.86-15.04-8.74l-30.71,17.52v71.52h68.62Z"/>
+    </g>
+  </g>
+</svg>

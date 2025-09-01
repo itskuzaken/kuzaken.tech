@@ -8,14 +8,27 @@ export default function Footer() {
         <p>© {year} KUZAKEN. All Rights Reserved.</p>
         <div className="flex items-center gap-4">
           {/* Replace # with your actual profiles */}
-          <Link className="hover:text-[#c22126]" href="#" aria-label="GitHub">
+
+          <Link
+            className="hover:text-[#c22126]"
+            href="https://www.facebook.com/kuzaken"
+            aria-label="Facebook"
+          >
+            Facebook
+          </Link>
+          <Link
+            className="hover:text-[#c22126]"
+            href="https://www.tiktok.com/@kuzaken"
+            aria-label="TikTok"
+          >
+            TikTok
+          </Link>
+          <Link
+            className="hover:text-[#c22126]"
+            href="https://github.com/kuzaken"
+            aria-label="GitHub"
+          >
             GitHub
-          </Link>
-          <Link className="hover:text-[#c22126]" href="#" aria-label="LinkedIn">
-            LinkedIn
-          </Link>
-          <Link className="hover:text-[#c22126]" href="#" aria-label="Behance">
-            Behance
           </Link>
           <Link
             className="hover:text-[#c22126]"

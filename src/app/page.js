@@ -192,9 +192,11 @@ export default function Home() {
           >
             <p>
               Hello, I’m{" "}
-              <span className="font-semibold">Ken Francen G. Baylon</span>, an
-              IT student and tech enthusiast with a passion for both development
-              and design. My work bridges three areas:{" "}
+              <span className="font-semibold">Ken Francen G. Baylon</span>, I'm
+              Ken Francen G. Baylon, a 4th-year BSIT student at{" "}
+              <span className="font-semibold">STI West Negros University</span>.
+              I'm a tech enthusiast with a passion for both development and
+              design. My work bridges three areas:{" "}
               <span className="highlight">web development</span>,{" "}
               <span className="highlight">graphic/layout design</span>, and{" "}
               <span className="highlight">live broadcast operations</span>.
