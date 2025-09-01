@@ -40,9 +40,8 @@ const CATEGORIES = [
     key: "broadcast",
     label: "Broadcast Operations",
     tools: [
-      { name: "OBS Studio", subtitle: "Broadcasting", icon: "obs-studio.svg" },
+      { name: "OBS Studio", subtitle: "Broadcasting", icon: "obsstudio.svg" },
       { name: "vMix", subtitle: "Broadcasting", icon: "vmix.svg" },
-      { name: "Streamlabs", subtitle: "Broadcasting", icon: "streamlabs.svg" },
     ],
   },
 ];

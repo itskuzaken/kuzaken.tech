@@ -138,11 +138,25 @@ export default function Home() {
               </div>
               <a
                 href="#projects"
-                className="inline-flex items-center rounded-xl bg-[#c22126] px-6 py-3 text-white font-medium transition-colors hover:bg-white hover:text-[#141414]"
+                className="btn btn-cta btn-cta--pulse rounded-xl"
                 data-load="up"
                 data-load-delay="300"
+                aria-label="See my work projects"
               >
                 See My Work
+                <svg
+                  className="btn-ico-move"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M13 5l7 7-7 7" />
+                </svg>
               </a>
             </div>
           </div>
@@ -414,9 +428,24 @@ export default function Home() {
         </div>
         <a
           href="/Ken-Baylon-Resume.pdf"
-          className="mt-6 inline-flex items-center rounded-full bg-[#c22126] px-6 py-3 text-white font-medium transition-colors hover:bg-white hover:text-[#141414]"
+          className="mt-6 btn btn-secondary rounded-xl"
+          aria-label="Download resume as PDF"
         >
-          Download Resume (PDF)
+          Download Resume
+          <svg
+            className="btn-ico-move"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 5v10" />
+            <path d="M8 11l4 4 4-4" />
+            <path d="M5 19h14" />
+          </svg>
         </a>
       </section>
 
@@ -428,35 +457,275 @@ export default function Home() {
           Let’s connect.
         </p>
         <div className="mt-8 grid gap-8 md:grid-cols-2" data-stagger="80">
-          <div className="space-y-3 text-sm text-muted-80">
-            <p>
-              📧 Email:{" "}
-              <a
-                className="text-[#c22126] hover:underline"
-                href="mailto:youremail@example.com"
-              >
-                youremail@example.com
-              </a>
-            </p>
-            <p>
-              🔗 LinkedIn:{" "}
-              <a className="text-[#c22126] hover:underline" href="#">
-                linkedin.com/in/your-handle
-              </a>
-            </p>
-            <p>
-              💻 GitHub:{" "}
-              <a className="text-[#c22126] hover:underline" href="#">
-                github.com/your-handle
-              </a>
-            </p>
-            <p>
-              🎨 Behance/Dribbble:{" "}
-              <a className="text-[#c22126] hover:underline" href="#">
-                behance.net/your-handle
-              </a>
-            </p>
-          </div>
+          {/* Contact methods list */}
+          <section aria-label="Contact methods">
+            <ul role="list" className="space-y-3">
+              {/* GitHub */}
+              <li>
+                <a
+                  href="https://github.com/itskuzaken"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub profile: itskuzaken"
+                  className="group contact-row flex items-center gap-4 rounded-xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c22126]/60"
+                >
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-themic text-[var(--foreground)] transition-transform group-hover:scale-110 group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <title>GitHub</title>
+                      {/* Branch icon (neutral, works on light/dark) */}
+                      <circle cx="6" cy="6" r="2" />
+                      <circle cx="6" cy="18" r="2" />
+                      <circle cx="18" cy="12" r="2" />
+                      <path d="M8 6h5a3 3 0 013 3v0" />
+                      <path d="M8 18h5a3 3 0 000-6h-3" />
+                    </svg>
+                  </span>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="font-medium">GitHub</span>
+                    <span className="text-sm text-muted truncate">
+                      github.com/itskuzaken
+                    </span>
+                  </span>
+                  <span className="ml-auto inline-flex items-center text-muted-50 transition duration-200 ease-out group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="group-hover:translate-x-0.5"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+
+              {/* LinkedIn */}
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/kenfgbaylon/"
+                  target="_blank"
+                  aria-disabled="true"
+                  aria-label="LinkedIn profile"
+                  className="group contact-row flex items-center gap-4 rounded-xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c22126]/60"
+                >
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-themic text-[var(--foreground)] transition-transform group-hover:scale-110 group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <title>LinkedIn</title>
+                      {/* Briefcase icon to represent professional network */}
+                      <rect x="3" y="7" width="18" height="13" rx="2" />
+                      <path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2" />
+                    </svg>
+                  </span>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="font-medium">LinkedIn</span>
+                    <span className="text-sm text-muted truncate">
+                      linkedin.com/in/kenfgbaylon/
+                    </span>
+                  </span>
+                  <span className="ml-auto inline-flex items-center text-muted-50 transition duration-200 ease-out group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="group-hover:translate-x-0.5"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+
+              {/* Facebook */}
+              <li>
+                <a
+                  href="https://www.facebook.com/kenfgbaylon/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook page: kenfgbaylon"
+                  className="group contact-row flex items-center gap-4 rounded-xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c22126]/60"
+                >
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-themic text-[var(--foreground)] transition-transform group-hover:scale-110 group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <title>Facebook</title>
+                      {/* Generic social globe to avoid brand lockup */}
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M3 12h18" />
+                      <path d="M12 3a15 15 0 010 18" />
+                      <path d="M12 3a15 15 0 000 18" />
+                    </svg>
+                  </span>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="font-medium">Facebook</span>
+                    <span className="text-sm text-muted truncate">
+                      facebook.com/kenfgbaylon
+                    </span>
+                  </span>
+                  <span className="ml-auto inline-flex items-center text-muted-50 transition duration-200 ease-out group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="group-hover:translate-x-0.5"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+
+              {/* Email */}
+              <li>
+                <a
+                  href="mailto:kenbaylon143@gmail.com"
+                  aria-label="Email: kenbaylon143@gmail.com"
+                  className="group contact-row flex items-center gap-4 rounded-xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c22126]/60"
+                >
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-themic text-[var(--foreground)] transition-transform group-hover:scale-110 group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <title>Email</title>
+                      <rect x="3" y="5" width="18" height="14" rx="2" />
+                      <path d="M3 7l9 6 9-6" />
+                    </svg>
+                  </span>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="font-medium">Email</span>
+                    <span className="text-sm text-muted truncate">
+                      kenbaylon143@gmail.com
+                    </span>
+                  </span>
+                  <span className="ml-auto inline-flex items-center text-muted-50 transition duration-200 ease-out group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="group-hover:translate-x-0.5"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+
+              {/* Phone */}
+              <li>
+                {/* TODO: Replace +0000000000 with your real number in international format, e.g., +63XXXXXXXXXX */}
+                <a
+                  href="tel:+639918852721"
+                  aria-label="Phone number: tap to call"
+                  className="group contact-row flex items-center gap-4 rounded-xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c22126]/60"
+                >
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-themic text-[var(--foreground)] transition-transform group-hover:scale-110 group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <title>Phone</title>
+                      <path d="M22 16.92v2a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 013.08 4.18 2 2 0 015.06 2h2a2 2 0 012 1.72c.12.88.35 1.73.68 2.54a2 2 0 01-.45 2.11L8 9a16 16 0 006 6l.63-1.29a2 2 0 012.11-.45c.81.33 1.66.56 2.54.68A2 2 0 0122 16.92z" />
+                    </svg>
+                  </span>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="font-medium">Phone</span>
+                    <span className="text-sm text-muted truncate">
+                      +63 9918 852 721
+                    </span>
+                  </span>
+                  <span className="ml-auto inline-flex items-center text-muted-50 transition duration-200 ease-out group-hover:text-[#c22126]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="group-hover:translate-x-0.5"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
           <ContactForm />
         </div>
       </section>

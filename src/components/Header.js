@@ -10,6 +10,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("#home");
   const sectionsRef = useRef([]);
+  const menuRef = useRef(null);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -41,11 +42,13 @@ export default function Header() {
     // Scroll-based updater (robust for last section/contact)
     const updateByScroll = () => {
       const header = document.querySelector("header");
-      const offset = (header ? header.offsetHeight : 72) + 16; // extra padding for clarity
-      const y = window.scrollY + offset;
+      const headerHeight = header?.offsetHeight ?? 72;
+      const offset = headerHeight + 16; // extra padding for clarity
+      const scrollPos = window.scrollY + offset;
       let current = "#home";
       for (const el of els) {
-        if (el.offsetTop <= y) current = `#${el.id}`;
+        if (!el) continue;
+        if (el.offsetTop <= scrollPos) current = `#${el.id}`;
       }
       setActive(current);
     };
@@ -60,19 +63,87 @@ export default function Header() {
     };
   }, []);
 
+  // Keep a CSS var of header height for overlay/menu positioning
+  useEffect(() => {
+    const setHeaderVar = () => {
+      const header = document.querySelector("header");
+      if (header) {
+        document.documentElement.style.setProperty(
+          "--header-h",
+          `${header.offsetHeight}px`
+        );
+      }
+    };
+    setHeaderVar();
+    window.addEventListener("resize", setHeaderVar);
+    window.addEventListener("orientationchange", setHeaderVar);
+    return () => {
+      window.removeEventListener("resize", setHeaderVar);
+      window.removeEventListener("orientationchange", setHeaderVar);
+    };
+  }, []);
+
+  // Scroll lock + basic focus trap when mobile menu is open
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const root = document.documentElement;
+    const body = document.body;
+    root.classList.add("scroll-lock");
+    body.classList.add("scroll-lock");
+
+    const menuEl = menuRef.current;
+    let handleKeyDown;
+    if (menuEl) {
+      const focusables = menuEl.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      handleKeyDown = (e) => {
+        if (e.key === "Tab") {
+          if (!focusables.length) {
+            e.preventDefault();
+            return;
+          }
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        } else if (e.key === "Escape") {
+          setMenuOpen(false);
+        }
+      };
+      document.addEventListener("keydown", handleKeyDown);
+      // initial focus
+      if (first) first.focus();
+      else menuEl.focus();
+    }
+
+    return () => {
+      root.classList.remove("scroll-lock");
+      body.classList.remove("scroll-lock");
+      if (handleKeyDown) document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
   const logoSrc = useMemo(
     () =>
       theme === "light" ? "/KuzakenTech_Black.svg" : "/KuzakenTech_White.svg",
     [theme]
   );
-  const toggleClass =
-    theme === "light"
-      ? "ml-4 inline-flex items-center gap-2 rounded-full border border-themic bg-[var(--background)] px-3 py-1.5 text-[var(--foreground)] hover:opacity-90 transition-colors"
-      : "ml-4 inline-flex items-center gap-2 rounded-full border border-themic bg-soft px-3 py-1.5 text-white hover:opacity-90 transition-colors";
+  // theme-toggle styles now come from globals.css
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all ${
+      className={`sticky top-0 z-[60] transition-all ${
         scrolled
           ? "backdrop-blur bg-header border-b border-themic"
           : "bg-transparent"
@@ -104,93 +175,124 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className={`relative transition-colors ${
-                  isActive ? "text-[#c22126]" : "hover:text-[#c22126]"
-                }`}
+                className={`nav-link ${isActive ? "nav-link--active" : ""}`}
                 onClick={() => setActive(href)}
                 aria-current={isActive ? "page" : undefined}
               >
                 <span>{label}</span>
-                <span
-                  aria-hidden
-                  className={`absolute -bottom-1 left-0 h-[2px] w-full transition-opacity ${
-                    isActive
-                      ? "opacity-100 bg-[#c22126]"
-                      : "opacity-0 bg-transparent"
-                  }`}
-                />
               </Link>
             );
           })}
           <button
             onClick={toggle}
-            className={toggleClass}
+            className="theme-toggle"
             aria-label="Toggle theme"
           >
-            <span className="inline-block w-4 text-center" aria-hidden>
-              {theme === "dark" ? "🌙" : "☀️"}
-            </span>
-            <span className="text-xs">
-              {theme === "dark" ? "Dark" : "Light"}
-            </span>
+            <svg
+              className="icon icon-sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <svg
+              className="icon icon-moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
           </button>
         </nav>
 
         {/* Mobile: burger button */}
         <button
-          className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-[var(--foreground)] hover:bg-soft transition-colors"
-          aria-label="Open menu"
+          className="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-[var(--foreground)] hover:bg-soft transition-all"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          aria-haspopup="dialog"
           onClick={() => setMenuOpen((v) => !v)}
         >
-          <span className="sr-only">Menu</span>
-          {/* Burger icon */}
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <span
+            className={`burger ${menuOpen ? "burger--open" : ""}`}
+            aria-hidden
           >
-            <path
-              d="M3 6h18M3 12h18M3 18h18"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+            <span className="burger-line burger-line--top" />
+            <span className="burger-line burger-line--mid" />
+            <span className="burger-line burger-line--bot" />
+          </span>
         </button>
       </div>
 
-      {/* Mobile menu panel */}
+      {/* Mobile menu panel — header stays visible (sticky). We offset overlay/panel by --header-h. */}
       {menuOpen && (
         <div className="md:hidden">
           {/* Overlay */}
           <button
             aria-label="Close menu"
             onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm"
+            className="fixed left-0 right-0 bottom-0 z-[50] bg-black/45 backdrop-blur-sm"
+            style={{ top: "var(--header-h, 64px)" }}
           />
           <div
-            className="absolute right-4 left-4 mt-2 rounded-2xl border border-themic bg-header shadow-lg"
-            role="menu"
+            ref={menuRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-hidden={!menuOpen}
+            tabIndex={-1}
+            className="fixed left-0 right-0 z-[55] border-t border-themic bg-header mobile-panel max-h-[calc(100vh-var(--header-h,64px))] overflow-y-auto"
+            style={{ top: "calc(var(--header-h, 64px) + 0.5rem)" }}
           >
             <div className="px-5 py-4 flex items-center justify-between">
               <span className="text-sm text-muted-80">Navigate</span>
-              <button
-                className={toggleClass}
-                onClick={toggle}
-                aria-label="Toggle theme"
-              >
-                <span className="inline-block w-4 text-center" aria-hidden>
-                  {theme === "dark" ? "🌙" : "☀️"}
-                </span>
-                <span className="text-xs">
-                  {theme === "dark" ? "Dark" : "Light"}
-                </span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={toggle}
+                  className="theme-toggle"
+                  aria-label="Toggle theme"
+                >
+                  <svg
+                    className="icon icon-sun"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                  </svg>
+                  <svg
+                    className="icon icon-moon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                  </svg>
+                </button>
+              </div>
             </div>
-            <nav className="px-2 pb-3 text-sm text-muted-80">
+            <nav className="px-0 pb-2 text-base text-muted-80">
               {[
                 ["Home", "#home"],
                 ["About", "#about"],
@@ -198,21 +300,21 @@ export default function Header() {
                 ["Projects", "#projects"],
                 ["Resume", "#resume"],
                 ["Contact", "#contact"],
-              ].map(([label, href]) => {
+              ].map(([label, href], idx) => {
                 const isActive = active === href;
                 return (
                   <Link
                     key={href}
                     href={href}
-                    className={`block rounded-xl px-4 py-3 transition-colors ${
-                      isActive
-                        ? "text-[#c22126]"
-                        : "hover:bg-soft hover:text-[var(--foreground)]"
+                    className={`mobile-link mobile-link-anim ${
+                      isActive ? "mobile-link--active" : ""
                     }`}
+                    style={{ animationDelay: `${idx * 40}ms` }}
                     onClick={() => {
                       setActive(href);
                       setMenuOpen(false);
                     }}
+                    role="menuitem"
                   >
                     {label}
                   </Link>

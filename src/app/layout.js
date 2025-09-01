@@ -5,10 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ScrollEffects from "@/components/ScrollEffects";
-import dynamic from "next/dynamic";
-const BackgroundOrbs = dynamic(() => import("@/components/BackgroundOrbs"), {
-  ssr: false,
-});
+import BackgroundOrbs from "@/components/BackgroundOrbs";
 
 const montserrat = Montserrat({
   variable: "--font-heading",
@@ -33,8 +30,7 @@ export const metadata = {
   description:
     "Modern portfolio of Ken Francen G. Baylon (KUZAKEN): web development, design, and broadcast ops.",
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/icon.svg",
   },
   openGraph: {
     title: "KUZAKEN.TECH",
@@ -64,11 +60,13 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider>
           <Header />
-          <BackgroundOrbs />
-          <ScrollEffects />
-          {children}
-          <Analytics />
-          <Footer />
+          <div data-app-main>
+            <BackgroundOrbs />
+            <ScrollEffects />
+            {children}
+            <Analytics />
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -242,6 +242,21 @@ body {
     0 8px 24px rgba(194, 33, 38, 0.15);
 }
 
+/* Contact rows: match card accent hover feel */
+.contact-row {
+  background: var(--header-bg);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 12px rgba(20, 20, 20, 0.3);
+  transition: transform 200ms ease, box-shadow 200ms ease,
+    background-color 200ms ease, color 200ms ease;
+}
+.contact-row:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(20, 20, 20, 0.4), 0 0 0 1px #c22126 inset,
+    0 8px 22px rgba(194, 33, 38, 0.22);
+}
+
 /* Skills tool cards: smoother, subtle scale with red glow from .card--accent */
 .tool-card {
   transition: transform 300ms ease, box-shadow 300ms ease,
@@ -257,6 +272,111 @@ body {
   border-bottom: 2px solid #c22126;
 }
 
+/* Reusable buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px; /* mobile target */
+  padding: 0.75rem 1.25rem; /* px-5 py-3 approx */
+  border-radius: 0.75rem; /* rounded-xl */
+  font-weight: 600;
+  line-height: 1;
+  transition: all 300ms ease-in-out;
+  will-change: transform, box-shadow, background-position, background-color,
+    color, border-color;
+}
+.btn:active {
+  transform: scale(0.95);
+}
+.btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* CTA: gradient brand background */
+.btn-cta {
+  color: #fff;
+  background-image: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--kb-red) 92%, black) 0%,
+    var(--kb-red) 45%,
+    color-mix(in oklab, var(--kb-red) 70%, white) 100%
+  );
+  background-size: 200% 200%;
+  box-shadow: 0 10px 20px rgba(194, 33, 38, 0.25);
+}
+.btn-cta:hover {
+  transform: translateY(-1px) scale(1.05);
+  background-position: 100% 0;
+  box-shadow: 0 16px 32px rgba(194, 33, 38, 0.32), 0 0 0 1px #c22126 inset;
+}
+.btn-cta:hover .btn-ico-move {
+  transform: translateX(4px);
+}
+.btn-cta--pulse {
+  position: relative;
+}
+.btn-cta--pulse::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 0 0 color-mix(in oklab, var(--kb-red) 45%, transparent);
+  animation: pulse-border 2.2s ease-in-out infinite;
+}
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--kb-red) 45%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 12px color-mix(in oklab, var(--kb-red) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--kb-red) 0%, transparent);
+  }
+}
+
+/* Secondary: solid brand with subtle hover */
+.btn-secondary {
+  color: #fff;
+  background-color: var(--kb-red);
+  box-shadow: 0 8px 18px rgba(194, 33, 38, 0.22);
+}
+.btn-secondary:hover {
+  transform: translateY(-1px) scale(1.05);
+  background-color: color-mix(in oklab, var(--kb-red) 85%, white);
+  box-shadow: 0 14px 28px rgba(194, 33, 38, 0.3), 0 0 0 1px #c22126 inset;
+}
+.btn-secondary .btn-ico-move {
+  transition: transform 300ms ease-in-out;
+}
+.btn-secondary:hover .btn-ico-move {
+  transform: translateX(3px);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #c22126aa;
+}
+
+/* Loading spinner for submit buttons */
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Headings use Montserrat */
 h1,
 h2,
@@ -267,6 +387,210 @@ h6 {
   font-family: var(--font-heading), ui-sans-serif, system-ui, -apple-system,
     Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial,
     "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Header navigation links */
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.25rem; /* taller tap target on desktop */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--muted-80);
+  transition: all 300ms ease-in-out;
+}
+.nav-link:hover {
+  color: var(--foreground);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.2rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--kb-red),
+    color-mix(in oklab, var(--kb-red) 40%, white)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  opacity: 0.7;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+.nav-link--active {
+  color: var(--kb-red);
+}
+.nav-link--active::after {
+  transform: scaleX(1);
+}
+
+/* Burger icon animation */
+.burger {
+  position: relative;
+  width: 28px;
+  height: 22px;
+}
+.burger-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out,
+    top 300ms ease-in-out, bottom 300ms ease-in-out;
+}
+.burger-line--top {
+  top: 2px;
+}
+.burger-line--mid {
+  top: 10px;
+}
+.burger-line--bot {
+  bottom: 2px;
+}
+.burger--open .burger-line--top {
+  top: 10px;
+  transform: rotate(45deg);
+}
+.burger--open .burger-line--mid {
+  opacity: 0;
+}
+.burger--open .burger-line--bot {
+  bottom: auto;
+  top: 10px;
+  transform: rotate(-45deg);
+}
+
+/* Mobile menu panel animation */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mobile-panel {
+  animation: slideDownFade 260ms ease-out both;
+}
+.mobile-link {
+  display: block;
+  width: 100%;
+  position: relative;
+  border-radius: 0;
+  padding: 1rem 1.25rem;
+  min-height: 48px;
+  transition: background-color 220ms ease, color 220ms ease,
+    transform 120ms ease;
+}
+.mobile-link:hover {
+  background: var(--soft);
+  color: var(--foreground);
+}
+.mobile-link:active {
+  transform: scale(0.98);
+}
+.mobile-link + .mobile-link {
+  border-top: 1px solid var(--border);
+}
+.mobile-link::after {
+  content: "";
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 0.5rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--kb-red),
+    color-mix(in oklab, var(--kb-red) 40%, white)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms ease;
+  opacity: 0.8;
+}
+.mobile-link:hover::after {
+  transform: scaleX(1);
+}
+.mobile-link--active {
+  color: var(--kb-red);
+}
+.mobile-link-anim {
+  opacity: 0;
+  transform: translateX(-6px);
+  animation: linkIn 320ms ease forwards;
+}
+@keyframes linkIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Theme toggle icon animation */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.6rem; /* mobile: comfy tap */
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  color: var(--foreground);
+  transition: all 300ms ease-in-out;
+  min-height: 30px; /* mobile target */
+}
+.theme-toggle:hover {
+  background: var(--soft-hover);
+}
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+.theme-toggle .icon {
+  width: 1rem; /* ~16px */
+  height: 1rem;
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.icon-sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.8);
+}
+.icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+[data-theme="light"] .icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+[data-theme="light"] .icon-moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.8);
+}
+
+/* Desktop: compact size to match logo proportions */
+@media (min-width: 768px) {
+  .theme-toggle {
+    padding: 0.35rem 0.5rem;
+    min-height: 24px;
+  }
+  .theme-toggle .icon {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
 }
 
 /* Typewriter caret */

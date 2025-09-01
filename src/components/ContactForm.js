@@ -3,10 +3,15 @@ import { useState } from "react";
 
 export default function ContactForm() {
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function onSubmit(e) {
     e.preventDefault();
-    setStatus("Thanks! Your message has been noted (demo only).");
+    setLoading(true);
+    setTimeout(() => {
+      setStatus("Thanks! Your message has been noted (demo only).");
+      setLoading(false);
+    }, 900);
   }
 
   return (
@@ -17,7 +22,10 @@ export default function ContactForm() {
     >
       <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="contact-name" className="block text-xs uppercase tracking-wide text-muted">
+          <label
+            htmlFor="contact-name"
+            className="block text-xs uppercase tracking-wide text-muted"
+          >
             Name
           </label>
           <input
@@ -32,7 +40,10 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="contact-email" className="block text-xs uppercase tracking-wide text-muted">
+          <label
+            htmlFor="contact-email"
+            className="block text-xs uppercase tracking-wide text-muted"
+          >
             Email
           </label>
           <input
@@ -50,7 +61,10 @@ export default function ContactForm() {
         </div>
       </div>
       <div>
-        <label htmlFor="contact-message" className="block text-xs uppercase tracking-wide text-muted">
+        <label
+          htmlFor="contact-message"
+          className="block text-xs uppercase tracking-wide text-muted"
+        >
           Message
         </label>
         <textarea
@@ -65,9 +79,28 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        className="inline-flex items-center rounded-full bg-[#c22126] px-6 py-3 font-medium text-white transition-colors hover:bg-white hover:text-[#141414]"
+        className="btn btn-secondary rounded-xl disabled:opacity-70"
+        disabled={loading}
+        aria-busy={loading ? "true" : "false"}
       >
-        Send Message
+        {loading ? (
+          <span className="spinner" aria-hidden="true" />
+        ) : (
+          <svg
+            className="btn-ico-move"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M22 2L11 13" />
+            <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+          </svg>
+        )}
+        <span>{loading ? "Sending..." : "Send Message"}</span>
       </button>
       {status && (
         <p className="text-sm text-muted" role="status" aria-live="polite">
