@@ -254,7 +254,6 @@ export default function Header() {
             aria-hidden={!menuOpen}
             tabIndex={-1}
             className="fixed left-0 right-0 z-[55] border-t border-themic bg-header mobile-panel max-h-[calc(100vh-var(--header-h,64px))] overflow-y-auto"
-            style={{ top: "calc(var(--header-h, 64px) + 0.5rem)" }}
           >
             <div className="px-5 py-4 flex items-center justify-between">
               <span className="text-sm text-muted-80">Navigate</span>
@@ -306,7 +305,7 @@ export default function Header() {
                   <Link
                     key={href}
                     href={href}
-                    className={`mobile-link mobile-link-anim ${
+                    className={`border-t mobile-link mobile-link-anim ${
                       isActive ? "mobile-link--active" : ""
                     }`}
                     style={{ animationDelay: `${idx * 40}ms` }}
