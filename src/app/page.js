@@ -76,7 +76,7 @@ export default function Home() {
                 data-load-delay="260"
               >
                 <a
-                  href="https://www.facebook.com/kenfgbaylon/"
+                  href="https://www.facebook.com/kenfgbaylon"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -521,7 +521,7 @@ export default function Home() {
               {/* LinkedIn */}
               <li>
                 <a
-                  href="https://www.linkedin.com/in/kenfgbaylon/"
+                  href="https://www.linkedin.com/in/kenfgbaylon"
                   target="_blank"
                   aria-disabled="true"
                   aria-label="LinkedIn profile"
@@ -549,7 +549,7 @@ export default function Home() {
                   <span className="flex min-w-0 flex-col">
                     <span className="font-medium">LinkedIn</span>
                     <span className="text-sm text-muted truncate">
-                      linkedin.com/in/kenfgbaylon/
+                      linkedin.com/in/kenfgbaylon
                     </span>
                   </span>
                   <span className="ml-auto inline-flex items-center text-muted-50 transition duration-200 ease-out group-hover:text-[#c22126]">
@@ -574,7 +574,7 @@ export default function Home() {
               {/* Facebook */}
               <li>
                 <a
-                  href="https://www.facebook.com/kenfgbaylon/"
+                  href="https://www.facebook.com/kenfgbaylon"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook page: kenfgbaylon"

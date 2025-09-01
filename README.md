@@ -4,7 +4,7 @@ A modern, responsive personal portfolio for Ken Francen G. Baylon (KUZAKEN). Bui
 
 ## Features
 
-- Polished, responsive layout with sticky header and mobile navigation
+- Polished, responsive layout with sticky header and modern mobile navigation
 - Light/Dark theme toggle with smooth, animated transitions
 - Hero headline with typewriter effect
 - Section reveal animations and smooth in-page anchor scrolling (header offset aware)
@@ -14,6 +14,14 @@ A modern, responsive personal portfolio for Ken Francen G. Baylon (KUZAKEN). Bui
 - Skills section with Category Tabs (Web Development, Graphics & Layout Design, Broadcast Operations) and per-tool cards (icon, name, subtitle)
 - Themed cards (transparent with red accent on hover)
 - Accessible markup, keyboard-friendly tabs, and alt/aria labels
+
+### Recent UI/UX improvements
+- Mobile menu: full-width stacked links, generous tap targets, underline hover effect, edge-to-edge panel
+- Overlay + scroll locking on mobile menu; header stays visible; focus trap and Escape-to-close
+- Header: animated nav link underline, burger morph animation, refined theme toggle sizing
+- Buttons: unified button styles (primary CTA, secondary) with micro-interactions and loading spinner for form submit
+- Contact: consistent contact rows with inline icons, right chevrons, phone tel: link
+- Footer: dynamic logo by theme (white on dark, black on light) + social links with icons and hover effects
 
 ## Tech Stack
 
@@ -51,6 +59,13 @@ npm run build
 npm start
 ```
 
+## Configuration
+
+- Social/profile links: update in `src/app/page.js` (hero socials), `src/components/Footer.js` (footer socials), and Contact section links in `src/app/page.js`.
+- Phone number: update the `tel:` link and display text in the Contact section of `src/app/page.js`.
+- Resume file: replace `/Ken-Baylon-Resume.pdf` under `public/` or update the link text accordingly.
+- Logos: customize SVGs in `public/` (`KuzakenTech_White.svg`, `KuzakenTech_Black.svg`, `Kuzaken_Logo_White.svg`, `Kuzaken_Logo_Black.svg`).
+
 ## Usage
 
 - Content: Update copy in `src/app/page.js` (sections: Home, About, Skills, Projects, Resume, Contact).
@@ -58,6 +73,12 @@ npm start
 - Theme: Theme tokens and utilities live in `src/app/globals.css` and `src/components/ThemeProvider.js`.
 - Header/Footer: Edit navigation and footer links in `src/components/Header.js` and `src/components/Footer.js`.
 - Assets: Replace images/logos under `public/` as needed.
+
+## Accessibility
+
+- Semantic structure (header, nav, main, section, footer) and ARIA labels on interactive elements
+- Mobile menu: focus is trapped while open; `aria-expanded`, `aria-controls`, and `role="dialog"` are used; Escape closes menu
+- Keyboard navigation: visible focus styles; links and buttons have adequate hit areas (≥44px on mobile)
 
 ## Screenshots / Demo
 
@@ -71,6 +92,11 @@ npm start
 Demo (optional)
 
 - Live: https://your-demo-url.example (update if deployed)
+
+## Deployment
+
+- Vercel recommended: connect the repo and deploy. Analytics via `@vercel/analytics` is already integrated.
+- For self-hosting, ensure Node.js 18/20 runtime and run `npm run build` then `npm start`.
 
 ## Project Structure
 
