@@ -6,12 +6,23 @@ import SkillsTabs from "@/components/SkillsTabs";
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-6xl px-6">
+    <main
+      className="mx-auto max-w-6xl px-6"
+      data-load="fade"
+      data-load-delay="20"
+    >
       {/* Home / Landing */}
-      <section id="home" className="section">
+      <section id="home" className="section" data-reveal="fade">
         <div className="grid md:grid-cols-[1.2fr_0.8fr] items-center gap-8 md:gap-10">
           {/* Image first on mobile */}
-          <div className="order-1 md:order-2 relative max-w-xs mx-auto md:ml-auto w-full">
+          <div
+            className="order-1 md:order-2 relative max-w-xs mx-auto md:ml-auto w-full"
+            data-reveal="zoom"
+            data-parallax="0.12"
+            data-load="right"
+            data-load-delay="180"
+            style={{ "--ld-dur": "750ms" }}
+          >
             <div className="absolute inset-1 rounded-2xl bg-gradient-to-br from-[#c22126]/70 via-transparent to-transparent" />
             <InteractiveTilt className="relative h-full w-full rounded-2xl border border-themic bg-soft backdrop-blur flex items-center justify-center">
               <Image
@@ -26,10 +37,20 @@ export default function Home() {
             </InteractiveTilt>
           </div>
           {/* Text second on mobile */}
-          <div className="order-2 md:order-1 text-center md:text-left">
+          <div
+            className="order-2 md:order-1 text-center md:text-left"
+            data-reveal="up"
+            data-load="left"
+            data-load-delay="60"
+            style={{ "--ld-dur": "750ms" }}
+          >
             <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
               Hi, I’m KUZAKEN —
-              <span className="block text-[#c22126] text-2xl md:text-4xl">
+              <span
+                className="block text-[#c22126] text-2xl md:text-4xl"
+                data-load="fade"
+                data-load-delay="140"
+              >
                 <Typewriter
                   words={[
                     "Web Developer",
@@ -39,12 +60,21 @@ export default function Home() {
                 />
               </span>
             </h1>
-            <p className="mt-4 text-muted-80 text-base md:text-lg max-w-2xl md:max-w-2xl mx-auto md:mx-0">
+            <p
+              className="mt-4 text-muted-80 text-base md:text-lg max-w-2xl md:max-w-2xl mx-auto md:mx-0"
+              data-load="fade"
+              data-load-delay="200"
+            >
               I build digital experiences, create visuals that tell stories, and
               operate live broadcasts for esports events.
             </p>
             <div className="mt-6 flex flex-col items-center md:items-start">
-              <div className="mb-4 flex items-center justify-center gap-4">
+              <div
+                className="mb-4 flex items-center justify-center gap-4"
+                data-stagger="60"
+                data-load="fade"
+                data-load-delay="260"
+              >
                 <a
                   href="https://www.facebook.com/kenfgbaylon/"
                   target="_blank"
@@ -109,6 +139,8 @@ export default function Home() {
               <a
                 href="#projects"
                 className="inline-flex items-center rounded-xl bg-[#c22126] px-6 py-3 text-white font-medium transition-colors hover:bg-white hover:text-[#141414]"
+                data-load="up"
+                data-load-delay="300"
               >
                 See My Work
               </a>
@@ -118,13 +150,16 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section id="about" className="section">
+      <section id="about" className="section" data-reveal="up">
         <h2 className="text-2xl md:text-3xl font-semibold">About Me</h2>
 
         {/* Two-column: image left, text right (stacks on mobile) */}
         <div className="mt-6 grid gap-8 md:grid-cols-2 md:items-center">
           {/* Left: image with tilt, responsive height (no enforced 1:1) */}
-          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto">
+          <div
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto"
+            data-reveal="zoom"
+          >
             <InteractiveTilt className="relative w-full h-64 sm:h-72 md:h-80 rounded-2xl border border-themic bg-soft overflow-hidden">
               <Image
                 src="/photos/picture1.jpg"
@@ -137,7 +172,10 @@ export default function Home() {
           </div>
 
           {/* Right: text content */}
-          <div className="text-muted-80 max-w-3xl space-y-4">
+          <div
+            className="text-muted-80 max-w-3xl space-y-4"
+            data-reveal="right"
+          >
             <p>
               Hello, I’m{" "}
               <span className="font-semibold">Ken Francen G. Baylon</span>, an
@@ -167,9 +205,12 @@ export default function Home() {
         </div>
 
         {/* Quick Snapshot cards: separate row below the two-column layout */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div
+          className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3"
+          data-stagger="80"
+        >
           {/* Full‑Stack Development */}
-          <div className="card card--accent">
+          <div className="card card--accent" data-reveal-item>
             <div className="flex items-start gap-3">
               {/* Custom lightweight SVG (code brackets) */}
               <svg
@@ -197,7 +238,7 @@ export default function Home() {
           </div>
 
           {/* Design & Layout */}
-          <div className="card card--accent">
+          <div className="card card--accent" data-reveal-item>
             <div className="flex items-start gap-3">
               {/* Custom lightweight SVG (layout grid) */}
               <svg
@@ -226,7 +267,7 @@ export default function Home() {
           </div>
 
           {/* Live Broadcast Ops */}
-          <div className="card card--accent">
+          <div className="card card--accent" data-reveal-item>
             <div className="flex items-start gap-3">
               {/* Custom lightweight SVG (broadcast/waves) */}
               <svg
@@ -259,7 +300,7 @@ export default function Home() {
       </section>
 
       {/* Skills */}
-      <section id="skills" className="section">
+      <section id="skills" className="section" data-reveal="up">
         <h2 className="text-2xl md:text-3xl font-semibold">Skills & Tools</h2>
         <p className="mt-2 text-muted-80 text-sm">Explore by category.</p>
         <div className="mt-6">
@@ -268,7 +309,7 @@ export default function Home() {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="section">
+      <section id="projects" className="section" data-reveal="up">
         <h2 className="text-2xl md:text-3xl font-semibold">Projects</h2>
 
         <div className="mt-8 space-y-10">
@@ -276,7 +317,7 @@ export default function Home() {
             <h3 className="text-lg font-semibold text-[#c22126]">
               Web Development
             </h3>
-            <div className="mt-4 grid gap-6 md:grid-cols-3">
+            <div className="mt-4 grid gap-6 md:grid-cols-3" data-stagger="80">
               {[
                 {
                   title: "RedVault",
@@ -314,7 +355,7 @@ export default function Home() {
             <h3 className="text-lg font-semibold text-[#c22126]">
               Design Projects
             </h3>
-            <div className="mt-4 grid gap-6 md:grid-cols-3">
+            <div className="mt-4 grid gap-6 md:grid-cols-3" data-stagger="80">
               {["Posters", "Event Graphics", "Branding Layouts"].map((t) => (
                 <article key={t} className="card card--accent">
                   <div className="h-36 rounded-md bg-soft border border-themic" />
@@ -331,7 +372,7 @@ export default function Home() {
             <h3 className="text-lg font-semibold text-[#c22126]">
               Broadcasting Experience
             </h3>
-            <div className="mt-4 grid gap-6 md:grid-cols-3">
+            <div className="mt-4 grid gap-6 md:grid-cols-3" data-stagger="80">
               {[
                 "Mobile Legends Streams",
                 "Tournament Coverage",
@@ -351,11 +392,11 @@ export default function Home() {
       </section>
 
       {/* Resume */}
-      <section id="resume" className="section">
+      <section id="resume" className="section" data-reveal="up">
         <h2 className="text-2xl md:text-3xl font-semibold">
           Resume / Experience
         </h2>
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 grid gap-6 md:grid-cols-2" data-stagger="80">
           <div className="card card--accent">
             <h3 className="font-semibold accent-title">Education</h3>
             <p className="mt-2 text-muted-80">
@@ -380,13 +421,13 @@ export default function Home() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="section">
+      <section id="contact" className="section" data-reveal="up">
         <h2 className="text-2xl md:text-3xl font-semibold">Contact</h2>
         <p className="mt-2 text-muted-80 max-w-2xl">
           Interested in working together or learning more about my projects?
           Let’s connect.
         </p>
-        <div className="mt-8 grid gap-8 md:grid-cols-2">
+        <div className="mt-8 grid gap-8 md:grid-cols-2" data-stagger="80">
           <div className="space-y-3 text-sm text-muted-80">
             <p>
               📧 Email:{" "}

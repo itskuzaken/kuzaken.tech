@@ -1,5 +1,6 @@
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
           <BackgroundOrbs />
           <ScrollEffects />
           {children}
+          <Analytics />
           <Footer />
         </ThemeProvider>
       </body>

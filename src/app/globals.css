@@ -312,16 +312,105 @@ h6 {
   }
 }
 
-/* Section reveal animations */
+/* Page load animations */
+[data-load] {
+  opacity: 0;
+  transition: opacity var(--ld-dur, 700ms)
+      var(--ld-ease, cubic-bezier(0.25, 0.8, 0.25, 1)),
+    transform var(--ld-dur, 700ms)
+      var(--ld-ease, cubic-bezier(0.25, 0.8, 0.25, 1));
+  transition-delay: var(--ld-delay, 0ms);
+  will-change: opacity, transform;
+}
+[data-load="fade"] {
+  transform: none;
+}
+[data-load="up"] {
+  transform: translateY(14px);
+}
+[data-load="zoom"] {
+  transform: scale(0.96);
+}
+[data-load="left"] {
+  /* Mobile/tablet stacked: slide down from top */
+  transform: translateY(-16px);
+}
+[data-load="right"] {
+  /* Mobile/tablet stacked: slide up from bottom */
+  transform: translateY(16px);
+}
+[data-load].load-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  /* Desktop/tablet two-column behavior */
+  [data-load="left"] {
+    transform: translateX(-24px);
+  }
+  [data-load="right"] {
+    transform: translateX(24px);
+  }
+}
+
+/* Section transitions (between anchors/sections) */
+.section-transition {
+  transition: opacity 380ms ease, transform 380ms ease;
+}
+.section-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.section-leave {
+  opacity: 0.6;
+  transform: translateY(-8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-load],
+  [data-load].load-visible,
+  .section-transition,
+  .section-enter,
+  .section-leave {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Section & element reveal animations (variant-based) */
 .reveal {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 420ms ease, transform 420ms ease;
+  transition-delay: var(--rv-delay, 0ms);
   will-change: opacity, transform;
+}
+.reveal[data-reveal="fade"] {
+  transform: none;
+}
+.reveal[data-reveal="up"] {
+  transform: translateY(12px);
+}
+.reveal[data-reveal="right"] {
+  transform: translateX(12px);
+}
+.reveal[data-reveal="zoom"] {
+  transform: scale(0.96);
 }
 .reveal--visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 .social-btn {

@@ -19,7 +19,7 @@ const CATEGORIES = [
       { name: "MySQL", subtitle: "Database", icon: "mysql.svg" },
       { name: "Firebase", subtitle: "Backend / Hosting", icon: "firebase.svg" },
       { name: "Vercel", subtitle: "Deployment", icon: "vercel.svg" },
-      { name: "Railway", subtitle: "Deployment", icon: "railway.svg" },
+      { name: "Github", subtitle: "Version Control", icon: "github.svg" },
     ],
   },
   {
