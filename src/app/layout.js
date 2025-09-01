@@ -35,10 +35,18 @@ export const metadata = {
   openGraph: {
     title: "KUZAKEN.TECH",
     description:
-      "Portfolio of Ken Francen G. Baylon – development, design, and broadcast operations.",
+      "E-Portfolio of Ken Francen G. Baylon – development, design, and broadcast operations.",
     url: "/",
     siteName: "KUZAKEN.TECH",
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "KUZAKEN.TECH preview",
+        type: "image/png",
+      },
+    ],
     type: "website",
     locale: "en_US",
   },
@@ -46,8 +54,8 @@ export const metadata = {
     card: "summary_large_image",
     title: "KUZAKEN.TECH",
     description:
-      "Portfolio of Ken Francen G. Baylon – development, design, and broadcast operations.",
-    images: ["/og.png"],
+      "E-Portfolio of Ken Francen G. Baylon – development, design, and broadcast operations.",
+  images: ["/twitter-image"],
   },
   robots: { index: true, follow: true },
 };
@@ -60,13 +68,11 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider>
           <Header />
-          <div data-app-main>
-            <BackgroundOrbs />
-            <ScrollEffects />
-            {children}
-            <Analytics />
-            <Footer />
-          </div>
+          <BackgroundOrbs />
+          <ScrollEffects />
+          {children}
+          <Analytics />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
