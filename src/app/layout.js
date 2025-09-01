@@ -39,12 +39,22 @@ export const metadata = {
     url: "/",
     siteName: "KUZAKEN.TECH",
     images: [
+      // Prefer dynamic image route (generated preview)
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "KUZAKEN.TECH preview",
         type: "image/png",
+      },
+      // Fallback to a static file if present
+      { url: "/og.png", width: 1200, height: 630, alt: "KUZAKEN.TECH preview" },
+      // Last resort: hero photo
+      {
+        url: "/photos/kenbaylon_image.png",
+        width: 1200,
+        height: 630,
+        alt: "KUZAKEN.TECH hero",
       },
     ],
     type: "website",
@@ -55,7 +65,7 @@ export const metadata = {
     title: "KUZAKEN.TECH",
     description:
       "E-Portfolio of Ken Francen G. Baylon – development, design, and broadcast operations.",
-  images: ["/twitter-image"],
+    images: ["/opengraph-image", "/og.png"],
   },
   robots: { index: true, follow: true },
 };
