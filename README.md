@@ -16,6 +16,7 @@ A modern, responsive personal portfolio for Ken Francen G. Baylon (KUZAKEN). Bui
 - Accessible markup, keyboard-friendly tabs, and alt/aria labels
 
 ### Recent UI/UX improvements
+
 - Mobile menu: full-width stacked links, generous tap targets, underline hover effect, edge-to-edge panel
 - Overlay + scroll locking on mobile menu; header stays visible; focus trap and Escape-to-close
 - Header: animated nav link underline, burger morph animation, refined theme toggle sizing
