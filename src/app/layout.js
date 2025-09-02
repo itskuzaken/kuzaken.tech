@@ -1,6 +1,7 @@
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -82,6 +83,7 @@ export default function RootLayout({ children }) {
           <ScrollEffects />
           {children}
           <Analytics />
+          <SpeedInsights />
           <Footer />
         </ThemeProvider>
       </body>
