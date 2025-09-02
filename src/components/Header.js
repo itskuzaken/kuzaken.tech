@@ -9,8 +9,9 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("#home");
-  const sectionsRef = useRef([]);
   const menuRef = useRef(null);
+  const menuButtonRef = useRef(null);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -27,23 +28,14 @@ export default function Header() {
 
   // Observe sections to highlight active link
   useEffect(() => {
-    const ids = [
-      "#home",
-      "#about",
-      "#skills",
-      "#projects",
-      "#resume",
-      "#contact",
-    ];
+    const ids = ["#home", "#about", "#skills", "#projects", "#resume", "#contact"];
     const els = ids.map((id) => document.querySelector(id)).filter(Boolean);
-    sectionsRef.current = els;
     if (!els.length) return;
 
-    // Scroll-based updater (robust for last section/contact)
     const updateByScroll = () => {
       const header = document.querySelector("header");
       const headerHeight = header?.offsetHeight ?? 72;
-      const offset = headerHeight + 16; // extra padding for clarity
+      const offset = headerHeight + 16;
       const scrollPos = window.scrollY + offset;
       let current = "#home";
       for (const el of els) {
@@ -53,7 +45,6 @@ export default function Header() {
       setActive(current);
     };
 
-    // Drive active state purely by scroll/resize for consistency (last section friendly)
     window.addEventListener("scroll", updateByScroll, { passive: true });
     window.addEventListener("resize", updateByScroll);
     updateByScroll();
@@ -68,10 +59,7 @@ export default function Header() {
     const setHeaderVar = () => {
       const header = document.querySelector("header");
       if (header) {
-        document.documentElement.style.setProperty(
-          "--header-h",
-          `${header.offsetHeight}px`
-        );
+        document.documentElement.style.setProperty("--header-h", `${header.offsetHeight}px`);
       }
     };
     setHeaderVar();
@@ -83,7 +71,7 @@ export default function Header() {
     };
   }, []);
 
-  // Scroll lock + basic focus trap when mobile menu is open
+  // Scroll lock + robust focus trap when mobile menu is open
   useEffect(() => {
     if (!menuOpen) return;
 
@@ -93,15 +81,16 @@ export default function Header() {
     body.classList.add("scroll-lock");
 
     const menuEl = menuRef.current;
+    const getFocusables = () =>
+      menuEl?.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])') || [];
     let handleKeyDown;
+    let handleFocusIn;
     if (menuEl) {
-      const focusables = menuEl.querySelectorAll(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      );
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
       handleKeyDown = (e) => {
         if (e.key === "Tab") {
+          const focusables = getFocusables();
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
           if (!focusables.length) {
             e.preventDefault();
             return;
@@ -121,8 +110,19 @@ export default function Header() {
           setMenuOpen(false);
         }
       };
+      // Keep focus within the dialog even if something outside gets focused
+      handleFocusIn = (e) => {
+        if (menuEl && !menuEl.contains(e.target)) {
+          const focusables = getFocusables();
+          const first = focusables[0];
+          (first || menuEl).focus();
+        }
+      };
       document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("focusin", handleFocusIn);
       // initial focus
+      const initialFocusables = getFocusables();
+      const first = initialFocusables[0];
       if (first) first.focus();
       else menuEl.focus();
     }
@@ -131,22 +131,28 @@ export default function Header() {
       root.classList.remove("scroll-lock");
       body.classList.remove("scroll-lock");
       if (handleKeyDown) document.removeEventListener("keydown", handleKeyDown);
+      if (handleFocusIn) document.removeEventListener("focusin", handleFocusIn);
     };
   }, [menuOpen]);
 
+  // When the menu closes, return focus to the trigger button
+  const prevOpenRef = useRef(menuOpen);
+  useEffect(() => {
+    if (prevOpenRef.current && !menuOpen) {
+      menuButtonRef.current?.focus();
+    }
+    prevOpenRef.current = menuOpen;
+  }, [menuOpen]);
+
   const logoSrc = useMemo(
-    () =>
-      theme === "light" ? "/KuzakenTech_Black.svg" : "/KuzakenTech_White.svg",
+    () => (theme === "light" ? "/KuzakenTech_Black.svg" : "/KuzakenTech_White.svg"),
     [theme]
   );
-  // theme-toggle styles now come from globals.css
 
   return (
     <header
       className={`sticky top-0 z-[60] transition-all ${
-        scrolled
-          ? "backdrop-blur bg-header border-b border-themic"
-          : "bg-transparent"
+        scrolled ? "backdrop-blur bg-header border-b border-themic" : "bg-transparent"
       }`}
     >
       <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
@@ -184,11 +190,7 @@ export default function Header() {
               </Link>
             );
           })}
-          <button
-            onClick={toggle}
-            className="theme-toggle"
-            aria-label="Toggle theme"
-          >
+          <button onClick={toggle} className="theme-toggle" aria-label="Toggle theme">
             <svg
               className="icon icon-sun"
               viewBox="0 0 24 24"
@@ -225,11 +227,9 @@ export default function Header() {
           aria-controls="mobile-menu"
           aria-haspopup="dialog"
           onClick={() => setMenuOpen((v) => !v)}
+          ref={menuButtonRef}
         >
-          <span
-            className={`burger ${menuOpen ? "burger--open" : ""}`}
-            aria-hidden
-          >
+          <span className={`burger ${menuOpen ? "burger--open" : ""}`} aria-hidden>
             <span className="burger-line burger-line--top" />
             <span className="burger-line burger-line--mid" />
             <span className="burger-line burger-line--bot" />
@@ -240,9 +240,10 @@ export default function Header() {
       {/* Mobile menu panel — header stays visible (sticky). We offset overlay/panel by --header-h. */}
       {menuOpen && (
         <div className="md:hidden">
-          {/* Overlay */}
-          <button
-            aria-label="Close menu"
+          {/* Overlay (non-focusable, click to close) */}
+          <div
+            role="presentation"
+            aria-hidden="true"
             onClick={() => setMenuOpen(false)}
             className="fixed left-0 right-0 bottom-0 z-[50] bg-black/45 backdrop-blur-sm"
             style={{ top: "var(--header-h, 64px)" }}
@@ -252,18 +253,32 @@ export default function Header() {
             id="mobile-menu"
             role="dialog"
             aria-modal="true"
-            aria-hidden={!menuOpen}
+            aria-labelledby="mobile-menu-title"
             tabIndex={-1}
             className="fixed left-0 right-0 z-[55] border-t border-themic bg-header mobile-panel max-h-[calc(100vh-var(--header-h,64px))] overflow-y-auto"
           >
             <div className="px-5 py-4 flex items-center justify-between">
-              <span className="text-sm text-muted-80">Navigate</span>
+              <span id="mobile-menu-title" className="text-sm text-muted-80">
+                Navigate
+              </span>
               <div className="flex items-center gap-2">
-                <button
-                  onClick={toggle}
-                  className="theme-toggle"
-                  aria-label="Toggle theme"
-                >
+                <button onClick={() => setMenuOpen(false)} className="theme-toggle" aria-label="Close menu">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+                <button onClick={toggle} className="theme-toggle" aria-label="Toggle theme">
                   <svg
                     className="icon icon-sun"
                     viewBox="0 0 24 24"
@@ -306,15 +321,12 @@ export default function Header() {
                   <Link
                     key={href}
                     href={href}
-                    className={`border-t mobile-link mobile-link-anim ${
-                      isActive ? "mobile-link--active" : ""
-                    }`}
+                    className={`border-t mobile-link mobile-link-anim ${isActive ? "mobile-link--active" : ""}`}
                     style={{ animationDelay: `${idx * 40}ms` }}
                     onClick={() => {
                       setActive(href);
                       setMenuOpen(false);
                     }}
-                    role="menuitem"
                   >
                     {label}
                   </Link>

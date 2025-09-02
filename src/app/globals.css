@@ -56,6 +56,12 @@ body {
     "Apple Color Emoji", "Segoe UI Emoji";
 }
 
+/* Prevent background scroll when mobile menu/dialog is open */
+html.scroll-lock,
+body.scroll-lock {
+  overflow: hidden;
+}
+
 /* Decorative subtle background dots */
 .kb-bg {
   background-image: radial-gradient(
