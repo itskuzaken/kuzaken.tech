@@ -679,7 +679,6 @@ export default function Home() {
 
               {/* Phone */}
               <li>
-                {/* TODO: Replace +0000000000 with your real number in international format, e.g., +63XXXXXXXXXX */}
                 <a
                   href="tel:+639918852721"
                   aria-label="Phone number: tap to call"
