@@ -5,13 +5,41 @@ export default function ContactForm() {
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function onSubmit(e) {
+  async function onSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setStatus("Thanks! Your message has been noted (demo only).");
+    setStatus("");
+
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus("Thanks! Your message has been sent successfully.");
+        e.target.reset(); // Clear the form
+      } else {
+        setStatus(result.error || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setStatus("An error occurred. Please try again later.");
+    } finally {
       setLoading(false);
-    }, 900);
+    }
   }
 
   return (

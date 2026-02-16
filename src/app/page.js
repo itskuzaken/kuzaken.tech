@@ -213,7 +213,7 @@ export default function Home() {
             <p>
               What excites me most is the mix of creativity and technical
               problem-solving. Whether I’m coding, designing, or handling a live
-              show, I focus on delivering work that’s{" "}
+              broadcast, I focus on delivering work that’s{" "}
               <span className="font-medium">clean</span>,{" "}
               <span className="font-medium">functional</span>, and{" "}
               <span className="font-medium">engaging</span>.

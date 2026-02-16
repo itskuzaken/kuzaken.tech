@@ -39,11 +39,11 @@ export default function Header() {
     sectionsRef.current = els;
     if (!els.length) return;
 
-    // Scroll-based updater (robust for last section/contact)
+    // Scroll-based updater
     const updateByScroll = () => {
       const header = document.querySelector("header");
       const headerHeight = header?.offsetHeight ?? 72;
-      const offset = headerHeight + 16; // extra padding for clarity
+      const offset = headerHeight + 16;
       const scrollPos = window.scrollY + offset;
       let current = "#home";
       for (const el of els) {
@@ -53,7 +53,7 @@ export default function Header() {
       setActive(current);
     };
 
-    // Drive active state purely by scroll/resize for consistency (last section friendly)
+    // Drive active state purely by scroll/resize for consistency
     window.addEventListener("scroll", updateByScroll, { passive: true });
     window.addEventListener("resize", updateByScroll);
     updateByScroll();
@@ -83,14 +83,9 @@ export default function Header() {
     };
   }, []);
 
-  // Scroll lock + basic focus trap when mobile menu is open
+  // Basic focus trap when mobile menu is open
   useEffect(() => {
     if (!menuOpen) return;
-
-    const root = document.documentElement;
-    const body = document.body;
-    root.classList.add("scroll-lock");
-    body.classList.add("scroll-lock");
 
     const menuEl = menuRef.current;
     let handleKeyDown;
@@ -128,8 +123,6 @@ export default function Header() {
     }
 
     return () => {
-      root.classList.remove("scroll-lock");
-      body.classList.remove("scroll-lock");
       if (handleKeyDown) document.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen]);
@@ -139,7 +132,6 @@ export default function Header() {
       theme === "light" ? "/KuzakenTech_Black.svg" : "/KuzakenTech_White.svg",
     [theme]
   );
-  // theme-toggle styles now come from globals.css
 
   return (
     <header
@@ -251,7 +243,7 @@ export default function Header() {
             tabIndex={-1}
             className="fixed left-0 right-0 z-[55] border-t border-themic bg-header mobile-panel max-h-[calc(100vh-var(--header-h,64px))] overflow-y-auto"
           >
-            <div className="px-5 py-4 flex items-center justify-between">
+            <div className="px-5 py-4 flex items-center justify-between backdrop-blur-xl">
               <span className="text-sm text-muted-80">Navigate</span>
               <div className="flex items-center gap-2">
                 <button
@@ -287,7 +279,7 @@ export default function Header() {
                 </button>
               </div>
             </div>
-            <nav className="px-0 pb-2 text-base text-muted-80">
+            <nav className="px-0 pb-2 text-base text-muted-80 backdrop-blur-md">
               {[
                 ["Home", "#home"],
                 ["About", "#about"],
